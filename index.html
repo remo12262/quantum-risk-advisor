@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantum Risk Advisor — QuantumHorizon</title>
+<meta name="description" content="Valuta il rischio post-quantistico della tua organizzazione in meno di 10 minuti. Report executive con roadmap di migrazione.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #060810; --bg2: #0a0d16; --bg3: rgba(255,255,255,0.03);
+  --blue: #1a3a6e; --blue2: #2952a3; --cyan: #00d4ff;
+  --red: #ff4444; --orange: #ff8c00; --green: #00cc88;
+  --text: #d8e4f0; --muted: #4a5a70; --white: #eef4ff;
+  --border: rgba(0,212,255,0.12);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+/* ANIMATED BACKGROUND */
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(26,58,110,0.4), transparent),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,212,255,0.06), transparent);
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 48px; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(6,8,16,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-hex {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, var(--cyan), var(--blue2));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; color: var(--bg);
+}
+.nav-name { font-size: 13px; font-weight: 600; color: var(--white); letter-spacing: 0.03em; }
+.nav-badge { font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); padding: 3px 10px; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 120px 24px 80px; position: relative; z-index: 1;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cyan); border: 1px solid rgba(0,212,255,0.25);
+  padding: 6px 16px; margin-bottom: 32px;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.2} }
+
+.hero-h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(40px, 6vw, 80px); font-weight: 400;
+  line-height: 1.08; color: var(--white); max-width: 800px;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+.hero-h1 em { font-style: italic; color: var(--cyan); }
+
+.hero-p {
+  font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; color: var(--muted);
+  max-width: 520px; line-height: 1.7; margin-top: 24px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bg); background: var(--cyan);
+  padding: 16px 40px; margin-top: 40px; text-decoration: none; cursor: pointer; border: none;
+  transition: all 0.25s; animation: fadeUp 0.8s 0.3s ease both;
+}
+.hero-cta:hover { background: #33ddff; transform: translateY(-2px); }
+
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 64px; padding-top: 40px;
+  border-top: 1px solid var(--border); flex-wrap: wrap; justify-content: center;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+.stat-n { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--white); line-height: 1; }
+.stat-n span { color: var(--cyan); }
+.stat-l { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+
+/* ASSESSMENT TOOL */
+#assessment { padding: 80px 24px; position: relative; z-index: 1; }
+.tool-wrap { max-width: 860px; margin: 0 auto; }
+
+.tool-header { text-align: center; margin-bottom: 48px; }
+.tool-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; }
+.tool-h2 { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 3.5vw, 44px); color: var(--white); font-weight: 400; }
+
+/* PROGRESS */
+.progress-bar {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin-bottom: 48px;
+}
+.prog-step {
+  display: flex; align-items: center; gap: 0;
+}
+.prog-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; color: var(--muted);
+  transition: all 0.3s; position: relative; z-index: 1;
+}
+.prog-dot.active { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.08); }
+.prog-dot.done { background: var(--cyan); border-color: var(--cyan); color: var(--bg); }
+.prog-label { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); position: absolute; bottom: -20px; white-space: nowrap; left: 50%; transform: translateX(-50%); transition: color 0.3s; }
+.prog-dot.active .prog-label, .prog-dot.done .prog-label { color: var(--cyan); }
+.prog-line { width: 60px; height: 1px; background: var(--border); transition: background 0.3s; }
+.prog-line.done { background: var(--cyan); }
+
+/* SCREENS */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 36px 40px; margin-bottom: 24px;
+  animation: fadeUp 0.4s ease both;
+}
+.q-num { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+.q-text { font-family: 'DM Serif Display', serif; font-size: 20px; font-weight: 400; color: var(--white); margin-bottom: 8px; line-height: 1.4; }
+.q-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option {
+  padding: 14px 18px; border: 1px solid var(--border); background: var(--bg3);
+  cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 14px;
+  text-align: left;
+}
+.option:hover { border-color: rgba(0,212,255,0.3); background: rgba(0,212,255,0.04); }
+.option.selected { border-color: var(--cyan); background: rgba(0,212,255,0.08); }
+.option-dot {
+  width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--muted);
+  flex-shrink: 0; transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+}
+.option.selected .option-dot { background: var(--cyan); border-color: var(--cyan); }
+.option.selected .option-dot::after { content: ''; width: 6px; height: 6px; background: var(--bg); border-radius: 50%; }
+.option-text { font-size: 14px; color: var(--text); font-weight: 400; }
+.option-score { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+/* FORM FIELDS */
+.field-group { margin-bottom: 20px; }
+.field-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; display: block; }
+.field-input {
+  width: 100%; background: var(--bg3); border: 1px solid var(--border);
+  padding: 13px 16px; color: var(--text); font-size: 14px;
+  font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s;
+}
+.field-input:focus { border-color: rgba(0,212,255,0.4); }
+select.field-input { background: var(--bg2); cursor: pointer; }
+select.field-input option { background: var(--bg2); }
+
+/* BUTTONS */
+.btn-row { display: flex; gap: 12px; justify-content: space-between; margin-top: 32px; }
+.btn-back { padding: 12px 24px; background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: pointer; font-size: 12px; font-family: 'DM Sans', sans-serif; font-weight: 500; letter-spacing: 0.08em; transition: all 0.2s; }
+.btn-back:hover { border-color: var(--muted); color: var(--text); }
+.btn-next { padding: 12px 32px; background: var(--cyan); border: none; color: var(--bg); cursor: pointer; font-size: 12px; font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
+.btn-next:hover { background: #33ddff; }
+.btn-next:disabled { background: var(--muted); cursor: not-allowed; opacity: 0.4; }
+
+/* LOADER */
+.loader-wrap { text-align: center; padding: 80px 40px; background: var(--bg2); border: 1px solid var(--border); }
+.loader-ring {
+  width: 60px; height: 60px; border: 2px solid var(--border);
+  border-top-color: var(--cyan); border-radius: 50%;
+  animation: spin 1s linear infinite; margin: 0 auto 24px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-t { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); margin-bottom: 8px; }
+.loader-s { font-size: 12px; color: var(--muted); }
+
+/* RESULTS */
+.result-header { display: flex; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+.score-box {
+  flex: 0 0 200px; background: var(--bg2); border: 1px solid var(--border);
+  padding: 32px 24px; text-align: center;
+}
+.score-label { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; display: block; }
+.score-num { font-family: 'DM Serif Display', serif; font-size: 72px; font-weight: 400; line-height: 1; }
+.score-num.critical { color: var(--red); }
+.score-num.high { color: var(--orange); }
+.score-num.medium { color: #ffcc00; }
+.score-num.low { color: var(--green); }
+.score-status { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 8px; }
+
+.result-info { flex: 1; min-width: 280px; }
+.result-profile { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--white); margin-bottom: 12px; font-weight: 400; }
+.result-summary { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+.report-box {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 32px 36px; white-space: pre-wrap; line-height: 1.8;
+  font-size: 13.5px; color: #b8c8d8; max-height: 60vh; overflow-y: auto;
+  font-family: 'DM Sans', sans-serif;
+}
+.report-box::-webkit-scrollbar { width: 4px; }
+.report-box::-webkit-scrollbar-thumb { background: var(--border); }
+
+.result-actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+.btn-copy { padding: 10px 20px; background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: pointer; font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 500; letter-spacing: 0.1em; transition: all 0.2s; }
+.btn-copy:hover { border-color: var(--cyan); color: var(--cyan); }
+.btn-new { padding: 10px 20px; background: var(--cyan); border: none; color: var(--bg); cursor: pointer; font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
+.btn-new:hover { background: #33ddff; }
+
+@keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-stats { gap: 28px; }
+  #assessment { padding: 60px 20px; }
+  .q-card { padding: 24px 20px; }
+  .prog-line { width: 30px; }
+  .score-box { flex: 0 0 100%; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://quantumhub.tech" class="nav-logo">
+    <div class="nav-hex">QH</div>
+    <span class="nav-name">QuantumHorizon</span>
+  </a>
+  <div class="nav-badge">Quantum Risk Advisor</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <div class="hero-tag">Nuovo strumento AI · Gratuito</div>
+  <h1 class="hero-h1">Sei pronto alla<br><em>minaccia quantistica?</em></h1>
+  <p class="hero-p">In meno di 10 minuti scopri quanto sei vulnerabile agli attacchi quantistici e ricevi un report executive con la tua roadmap di migrazione post-quantum.</p>
+  <button class="hero-cta" onclick="startAssessment()">Inizia la valutazione →</button>
+  <div class="hero-stats">
+    <div><div class="stat-n">10<span>min</span></div><div class="stat-l">Durata assessment</div></div>
+    <div><div class="stat-n">NIST<span> ready</span></div><div class="stat-l">Standard FIPS 203/204/205</div></div>
+    <div><div class="stat-n">100<span>%</span></div><div class="stat-l">Gratuito</div></div>
+    <div><div class="stat-n">AI<span>-powered</span></div><div class="stat-l">Report personalizzato</div></div>
+  </div>
+</section>
+
+<!-- ASSESSMENT TOOL -->
+<section id="assessment" style="display:none;">
+  <div class="tool-wrap">
+
+    <div class="tool-header">
+      <span class="tool-tag">Quantum Risk Assessment</span>
+      <h2 class="tool-h2">Valutazione del rischio post-quantistico</h2>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-bar" style="margin-bottom: 56px;">
+      <div class="prog-step">
+        <div class="prog-dot active" id="pd1" style="position:relative;">1<span class="prog-label">Profilo</span></div>
+      </div>
+      <div class="prog-line" id="pl1"></div>
+      <div class="prog-step">
+        <div class="prog-dot" id="pd2" style="position:relative;">2<span class="prog-label">Infrastruttura</span></div>
+      </div>
+      <div class="prog-line" id="pl2"></div>
+      <div class="prog-step">
+        <div class="prog-dot" id="pd3" style="position:relative;">3<span class="prog-label">Crittografia</span></div>
+      </div>
+      <div class="prog-line" id="pl3"></div>
+      <div class="prog-step">
+        <div class="prog-dot" id="pd4" style="position:relative;">4<span class="prog-label">Dati</span></div>
+      </div>
+      <div class="prog-line" id="pl4"></div>
+      <div class="prog-step">
+        <div class="prog-dot" id="pd5" style="position:relative;">5<span class="prog-label">Report</span></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 1: PROFILO -->
+    <div class="screen active" id="screen1">
+      <div class="q-card">
+        <div class="q-num">Sezione 1 · Profilo organizzazione</div>
+        <div class="q-text">Dimmi qualcosa sulla tua organizzazione</div>
+        <div class="q-sub">Queste informazioni ci permettono di personalizzare il report in base al tuo settore e contesto normativo.</div>
+
+        <div class="field-group">
+          <label class="field-label">Nome organizzazione</label>
+          <input class="field-input" type="text" id="orgName" placeholder="es. Comune di Roma, Banca XYZ, Ministero...">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Settore</label>
+          <select class="field-input" id="orgSector">
+            <option value="">Seleziona settore...</option>
+            <option>Pubblica Amministrazione Centrale</option>
+            <option>Pubblica Amministrazione Locale</option>
+            <option>Sanità e Farmaceutica</option>
+            <option>Banche e Finanza</option>
+            <option>Difesa e Sicurezza Nazionale</option>
+            <option>Energia e Utilities</option>
+            <option>Telecomunicazioni</option>
+            <option>Trasporti e Logistica</option>
+            <option>Industria e Manifatturiero</option>
+            <option>Assicurazioni</option>
+            <option>Altro</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Dimensione organizzazione</label>
+          <select class="field-input" id="orgSize">
+            <option value="">Seleziona dimensione...</option>
+            <option>Piccola (< 50 dipendenti)</option>
+            <option>Media (50-500 dipendenti)</option>
+            <option>Grande (500-5.000 dipendenti)</option>
+            <option>Enterprise (> 5.000 dipendenti)</option>
+          </select>
+        </div>
+      </div>
+      <div class="btn-row">
+        <div></div>
+        <button class="btn-next" onclick="goTo(2)">Avanti →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: INFRASTRUTTURA -->
+    <div class="screen" id="screen2">
+      <div class="q-card">
+        <div class="q-num">Sezione 2 · Infrastruttura IT</div>
+        <div class="q-text">Qual è il tuo livello di consapevolezza sulla minaccia quantistica?</div>
+        <div class="q-sub">Seleziona l'opzione che meglio descrive la situazione attuale della tua organizzazione.</div>
+        <div class="options" id="q2a">
+          <div class="option" onclick="selectOption('q2a', this, 0)"><div class="option-dot"></div><div><div class="option-text">Non ne abbiamo mai sentito parlare</div><div class="option-score">Consapevolezza: nulla</div></div></div>
+          <div class="option" onclick="selectOption('q2a', this, 1)"><div class="option-dot"></div><div><div class="option-text">Ne siamo a conoscenza ma non abbiamo preso iniziative</div><div class="option-score">Consapevolezza: bassa</div></div></div>
+          <div class="option" onclick="selectOption('q2a', this, 2)"><div class="option-dot"></div><div><div class="option-text">Abbiamo fatto un'analisi preliminare interna</div><div class="option-score">Consapevolezza: media</div></div></div>
+          <div class="option" onclick="selectOption('q2a', this, 3)"><div class="option-dot"></div><div><div class="option-text">Abbiamo già un piano di migrazione post-quantum</div><div class="option-score">Consapevolezza: alta</div></div></div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-num">Sezione 2 · Infrastruttura IT</div>
+        <div class="q-text">Quanti sistemi critici utilizza la tua organizzazione?</div>
+        <div class="options" id="q2b">
+          <div class="option" onclick="selectOption('q2b', this, 3)"><div class="option-dot"></div><div><div class="option-text">Meno di 10 sistemi critici</div></div></div>
+          <div class="option" onclick="selectOption('q2b', this, 2)"><div class="option-dot"></div><div><div class="option-text">10-50 sistemi critici</div></div></div>
+          <div class="option" onclick="selectOption('q2b', this, 1)"><div class="option-dot"></div><div><div class="option-text">50-200 sistemi critici</div></div></div>
+          <div class="option" onclick="selectOption('q2b', this, 0)"><div class="option-dot"></div><div><div class="option-text">Oltre 200 sistemi critici</div></div></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" onclick="goTo(1)">← Indietro</button>
+        <button class="btn-next" onclick="goTo(3)">Avanti →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: CRITTOGRAFIA -->
+    <div class="screen" id="screen3">
+      <div class="q-card">
+        <div class="q-num">Sezione 3 · Crittografia</div>
+        <div class="q-text">Quali algoritmi crittografici utilizza attualmente la tua organizzazione?</div>
+        <div class="q-sub">Seleziona tutti quelli applicabili.</div>
+        <div class="options" id="q3a">
+          <div class="option" onclick="selectOption('q3a', this, 0)"><div class="option-dot"></div><div><div class="option-text">RSA (RSA-2048, RSA-4096)</div><div class="option-score">⚠️ Vulnerabile agli attacchi quantistici</div></div></div>
+          <div class="option" onclick="selectOption('q3a', this, 0)"><div class="option-dot"></div><div><div class="option-text">ECC (Elliptic Curve Cryptography)</div><div class="option-score">⚠️ Vulnerabile agli attacchi quantistici</div></div></div>
+          <div class="option" onclick="selectOption('q3a', this, 1)"><div class="option-dot"></div><div><div class="option-text">AES-256</div><div class="option-score">✓ Resistente con chiavi lunghe</div></div></div>
+          <div class="option" onclick="selectOption('q3a', this, 2)"><div class="option-dot"></div><div><div class="option-text">Standard NIST post-quantum (CRYSTALS-Kyber, CRYSTALS-Dilithium)</div><div class="option-score">✓ Resistente agli attacchi quantistici</div></div></div>
+          <div class="option" onclick="selectOption('q3a', this, 1)"><div class="option-dot"></div><div><div class="option-text">Non lo so / Da verificare</div><div class="option-score">⚠️ Richiede audit immediato</div></div></div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-num">Sezione 3 · Crittografia</div>
+        <div class="q-text">Avete un inventario completo di tutti i sistemi che usano crittografia?</div>
+        <div class="options" id="q3b">
+          <div class="option" onclick="selectOption('q3b', this, 0)"><div class="option-dot"></div><div><div class="option-text">No, non abbiamo un inventario crittografico</div></div></div>
+          <div class="option" onclick="selectOption('q3b', this, 1)"><div class="option-dot"></div><div><div class="option-text">Inventario parziale (meno del 50% dei sistemi)</div></div></div>
+          <div class="option" onclick="selectOption('q3b', this, 2)"><div class="option-dot"></div><div><div class="option-text">Inventario parziale (oltre il 50% dei sistemi)</div></div></div>
+          <div class="option" onclick="selectOption('q3b', this, 3)"><div class="option-dot"></div><div><div class="option-text">Sì, inventario completo e aggiornato</div></div></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" onclick="goTo(2)">← Indietro</button>
+        <button class="btn-next" onclick="goTo(4)">Avanti →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: DATI -->
+    <div class="screen" id="screen4">
+      <div class="q-card">
+        <div class="q-num">Sezione 4 · Esposizione dati</div>
+        <div class="q-text">Che tipo di dati sensibili tratta la tua organizzazione?</div>
+        <div class="options" id="q4a">
+          <div class="option" onclick="selectOption('q4a', this, 1)"><div class="option-dot"></div><div><div class="option-text">Dati personali comuni (GDPR)</div></div></div>
+          <div class="option" onclick="selectOption('q4a', this, 0)"><div class="option-dot"></div><div><div class="option-text">Dati sanitari o biometrici</div></div></div>
+          <div class="option" onclick="selectOption('q4a', this, 0)"><div class="option-dot"></div><div><div class="option-text">Dati finanziari e bancari</div></div></div>
+          <div class="option" onclick="selectOption('q4a', this, 0)"><div class="option-dot"></div><div><div class="option-text">Segreti di stato o informazioni classificate</div></div></div>
+          <div class="option" onclick="selectOption('q4a', this, 2)"><div class="option-dot"></div><div><div class="option-text">Dati operativi non sensibili</div></div></div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-num">Sezione 4 · Esposizione dati</div>
+        <div class="q-text">Per quanti anni i tuoi dati devono rimanere confidenziali?</div>
+        <div class="q-sub">Questa è la domanda chiave per valutare il rischio HNDL (Harvest Now, Decrypt Later).</div>
+        <div class="options" id="q4b">
+          <div class="option" onclick="selectOption('q4b', this, 3)"><div class="option-dot"></div><div><div class="option-text">Meno di 5 anni</div><div class="option-score">Rischio HNDL: basso</div></div></div>
+          <div class="option" onclick="selectOption('q4b', this, 2)"><div class="option-dot"></div><div><div class="option-text">5-10 anni</div><div class="option-score">Rischio HNDL: medio — entro la deadline quantistica</div></div></div>
+          <div class="option" onclick="selectOption('q4b', this, 1)"><div class="option-dot"></div><div><div class="option-text">10-25 anni</div><div class="option-score">Rischio HNDL: alto — migrazione urgente</div></div></div>
+          <div class="option" onclick="selectOption('q4b', this, 0)"><div class="option-dot"></div><div><div class="option-text">Oltre 25 anni o indefinitamente</div><div class="option-score">Rischio HNDL: critico — azione immediata</div></div></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" onclick="goTo(3)">← Indietro</button>
+        <button class="btn-next" onclick="generateReport()">⚡ Genera Report →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 5: LOADER + RESULT -->
+    <div class="screen" id="screen5">
+      <div class="loader-wrap" id="loaderWrap">
+        <div class="loader-ring"></div>
+        <div class="loader-t">Analisi in corso...</div>
+        <div class="loader-s">Calcolo score · Analisi gap NIST · Generazione roadmap</div>
+      </div>
+
+      <div id="resultWrap" style="display:none;">
+        <div class="result-header">
+          <div class="score-box">
+            <span class="score-label">Risk Score</span>
+            <div class="score-num" id="scoreNum">--</div>
+            <div class="score-status" id="scoreStatus"></div>
+          </div>
+          <div class="result-info">
+            <div class="result-profile" id="resultProfile"></div>
+            <div class="result-summary" id="resultSummary"></div>
+          </div>
+        </div>
+
+        <div class="report-box" id="reportBox"></div>
+
+        <div class="result-actions">
+          <button class="btn-copy" id="btnCopy" onclick="copyReport()">📋 Copia Report</button>
+          <button class="btn-new" onclick="resetAll()">+ Nuova Valutazione</button>
+          <a href="https://qstrategix.com" target="_blank" class="btn-next" style="text-decoration:none; display:inline-flex; align-items:center; padding: 10px 20px; font-size:11px;">Vai a Q-STRATEGIX →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  let answers = {};
+  let currentStep = 1;
+
+  function startAssessment() {
+    document.getElementById('heroSection').style.display = 'none';
+    document.getElementById('assessment').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function selectOption(groupId, el, score) {
+    document.querySelectorAll('#' + groupId + ' .option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    answers[groupId] = score;
+  }
+
+  function goTo(step) {
+    for (let i = 1; i <= 5; i++) {
+      document.getElementById('screen' + i).classList.toggle('active', i === step);
+      const pd = document.getElementById('pd' + i);
+      if (!pd) continue;
+      if (i < step) { pd.classList.add('done'); pd.classList.remove('active'); pd.childNodes[0].textContent = '✓'; }
+      else if (i === step) { pd.classList.remove('done'); pd.classList.add('active'); if (pd.childNodes[0].textContent === '✓') pd.childNodes[0].textContent = i; }
+      else { pd.classList.remove('done', 'active'); if (pd.childNodes[0].textContent === '✓') pd.childNodes[0].textContent = i; }
+      if (i <= 4) {
+        const pl = document.getElementById('pl' + i);
+        if (pl) pl.classList.toggle('done', i < step);
+      }
+    }
+    currentStep = step;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function calcScore() {
+    const scores = Object.values(answers);
+    if (scores.length === 0) return 25;
+    const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+    return Math.round((avg / 3) * 100);
+  }
+
+  async function generateReport() {
+    goTo(5);
+    document.getElementById('loaderWrap').style.display = 'block';
+    document.getElementById('resultWrap').style.display = 'none';
+
+    const score = calcScore();
+    const orgName = document.getElementById('orgName').value || 'Organizzazione';
+    const sector = document.getElementById('orgSector').value || 'Generico';
+    const size = document.getElementById('orgSize').value || 'Non specificata';
+
+    let riskLevel = score >= 75 ? 'BASSO' : score >= 50 ? 'MEDIO' : score >= 25 ? 'ALTO' : 'CRITICO';
+    let profile = score >= 75 ? 'Quantum Ready' : score >= 50 ? 'In Transizione' : score >= 25 ? 'Vulnerabile' : 'Esposizione Critica';
+
+    const prompt = `Sei un esperto di cybersecurity post-quantistica certificato NIST. Genera un report executive di quantum risk assessment per la seguente organizzazione:
+
+ORGANIZZAZIONE: ${orgName}
+SETTORE: ${sector}
+DIMENSIONE: ${size}
+QUANTUM RISK SCORE: ${score}/100
+LIVELLO DI RISCHIO: ${riskLevel}
+PROFILO: ${profile}
+
+RISPOSTE ASSESSMENT:
+- Consapevolezza quantistica: ${answers['q2a'] !== undefined ? ['Nulla','Bassa','Media','Alta'][answers['q2a']] : 'Non specificato'}
+- Numero sistemi critici: ${answers['q2b'] !== undefined ? ['Oltre 200','50-200','10-50','Meno di 10'][answers['q2b']] : 'Non specificato'}
+- Inventario crittografico: ${answers['q3b'] !== undefined ? ['Assente','Parziale <50%','Parziale >50%','Completo'][answers['q3b']] : 'Non specificato'}
+- Sensibilità dati: ${answers['q4a'] !== undefined ? ['Alta','Alta','Alta','Critica','Bassa'][answers['q4a']] : 'Non specificato'}
+- Confidenzialità richiesta: ${answers['q4b'] !== undefined ? ['< 5 anni','5-10 anni','10-25 anni','> 25 anni'][answers['q4b']] : 'Non specificato'}
+
+Genera un report strutturato con:
+
+1. EXECUTIVE SUMMARY (3-4 righe)
+2. ANALISI DEL RISCHIO QUANTISTICO
+   - Vulnerabilità identificate
+   - Rischio HNDL (Harvest Now, Decrypt Later)
+   - Gap rispetto agli standard NIST FIPS 203/204/205
+3. IMPATTO NORMATIVO
+   - Conformità NIS2
+   - ACN Strategia Nazionale Cybersicurezza
+   - GDPR e protezione dati
+4. ROADMAP DI MIGRAZIONE POST-QUANTUM
+   - Fase 1 (0-6 mesi): Azioni immediate
+   - Fase 2 (6-18 mesi): Migrazione core
+   - Fase 3 (18-36 mesi): Completamento e certificazione
+5. PRIORITÀ DI INTERVENTO
+6. KPI E METRICHE DI SUCCESSO
+
+Il report deve essere professionale, specifico per il settore indicato, e citare gli standard NIST rilevanti.`;
+
+    try {
+      const response = await fetch('https://q-strategix-backend-1-0w5h.onrender.com/api/procurement/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          doc_type: 'Quantum Risk Report',
+          ente: orgName,
+          sector: sector,
+          description: `Risk Score: ${score}/100 - Livello: ${riskLevel} - Profilo: ${profile}`,
+          budget: '',
+          compliance: ['NIST FIPS 203/204/205', 'NIS2', 'ACN Strategia Nazionale']
+        })
+      });
+      const data = await response.json();
+      const report = data.document || 'Errore nella generazione del report.';
+
+      document.getElementById('loaderWrap').style.display = 'none';
+      document.getElementById('resultWrap').style.display = 'block';
+
+      const scoreEl = document.getElementById('scoreNum');
+      scoreEl.textContent = score;
+      scoreEl.className = 'score-num ' + (score >= 75 ? 'low' : score >= 50 ? 'medium' : score >= 25 ? 'high' : 'critical');
+
+      document.getElementById('scoreStatus').textContent = riskLevel;
+      document.getElementById('scoreStatus').style.color = score >= 75 ? 'var(--green)' : score >= 50 ? '#ffcc00' : score >= 25 ? 'var(--orange)' : 'var(--red)';
+      document.getElementById('resultProfile').textContent = profile;
+      document.getElementById('resultSummary').textContent = score >= 75
+        ? 'La tua organizzazione ha una buona postura quantum. Continua a monitorare e aggiorna i sistemi rimanenti.'
+        : score >= 50
+        ? 'Sei nella fase di transizione. Accelera la migrazione per rispettare le deadline NIST 2030.'
+        : score >= 25
+        ? 'Attenzione: vulnerabilità significative rilevate. Piano di migrazione urgente necessario.'
+        : 'Esposizione critica. I tuoi dati sensibili sono già a rischio di attacchi HNDL. Azione immediata richiesta.';
+
+      document.getElementById('reportBox').textContent = report;
+
+    } catch (e) {
+      document.getElementById('loaderWrap').style.display = 'none';
+      document.getElementById('resultWrap').style.display = 'block';
+      document.getElementById('reportBox').textContent = 'Errore di connessione. Riprova tra qualche istante.';
+    }
+  }
+
+  function copyReport() {
+    navigator.clipboard.writeText(document.getElementById('reportBox').textContent);
+    const btn = document.getElementById('btnCopy');
+    btn.textContent = '✓ Copiato!';
+    setTimeout(() => btn.textContent = '📋 Copia Report', 2000);
+  }
+
+  function resetAll() {
+    answers = {};
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.getElementById('orgName').value = '';
+    document.getElementById('orgSector').value = '';
+    document.getElementById('orgSize').value = '';
+    document.getElementById('heroSection').style.display = 'flex';
+    document.getElementById('assessment').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
