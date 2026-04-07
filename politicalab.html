@@ -3,684 +3,739 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quantum Risk Advisor — QuantumCyberLabs</title>
-<meta name="description" content="Valuta il rischio post-quantistico della tua organizzazione in meno di 10 minuti. Report executive con roadmap NIST-compliant.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>PoliticaLab — Political Intelligence Advisor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --paper: #f7f3ec;
-  --cream: #ede8dc;
-  --ink: #1a1a2e;
-  --mid: #6b6560;
-  --border: #d4cdc3;
-  --white: #ffffff;
-  --red: #c0392b;
-  --green: #1a6b4a;
-  --orange: #d35400;
-  --blue: #1a3a6e;
-  --card: #ffffff;
-}
-html { scroll-behavior: smooth; }
-body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --accent: #c0392b;
+    --accent2: #1a6b4a;
+    --gold: #b8860b;
+    --mid: #6b6560;
+    --border: #ccc4b8;
+    --card: #ffffff;
+    --warn: #e67e22;
+  }
 
-/* NAV */
-nav {
-  background: var(--ink);
-  padding: 0 2.5rem;
-  height: 60px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 2px solid var(--blue);
-  position: sticky; top: 0; z-index: 100;
-}
-.nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-.nav-hex {
-  width: 26px; height: 26px;
-  background: var(--blue);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 7px; font-weight: 700; color: #fff; font-family: 'DM Mono', monospace;
-}
-.nav-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; }
-.nav-badge {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 3px 10px; border-radius: 2px;
-}
-.nav-back {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase;
-  color: rgba(255,255,255,0.4); text-decoration: none;
-  transition: color 0.2s;
-}
-.nav-back:hover { color: rgba(255,255,255,0.8); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* HERO */
-.hero {
-  background: var(--cream);
-  border-bottom: 1px solid var(--border);
-  padding: 3rem 2rem 2.5rem;
-  text-align: center;
-}
-.hero-tag {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--blue);
-  background: rgba(26,58,110,0.08);
-  padding: 4px 12px; border-radius: 2px;
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-bottom: 1.25rem;
-}
-.hero-tag::before { content: ''; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; animation: blink 2s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 900; line-height: 1.1; color: var(--ink);
-  margin-bottom: 0.75rem;
-}
-.hero h1 em { font-style: italic; color: var(--blue); }
-.hero-p { font-size: 0.92rem; color: var(--mid); max-width: 500px; margin: 0 auto 2rem; line-height: 1.65; }
-.hero-meta {
-  display: flex; justify-content: center; gap: 2.5rem;
-  flex-wrap: wrap; padding-top: 1.5rem; border-top: 1px solid var(--border);
-}
-.meta-item { text-align: center; }
-.meta-n { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); line-height: 1; }
-.meta-n span { color: var(--blue); }
-.meta-l { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); margin-top: 0.25rem; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
 
-/* TOOL WRAPPER */
-.tool { max-width: 820px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 2rem;
+    border-bottom: 3px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
 
-/* PROGRESS */
-.progress {
-  display: flex; align-items: center; justify-content: center;
-  gap: 0; margin-bottom: 2.5rem;
-}
-.prog-step { display: flex; align-items: center; }
-.prog-dot {
-  width: 34px; height: 34px; border-radius: 50%;
-  border: 2px solid var(--border);
-  background: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 500;
-  color: var(--mid); position: relative; transition: all 0.3s; z-index: 1;
-}
-.prog-dot.active { border-color: var(--blue); color: var(--blue); background: rgba(26,58,110,0.05); }
-.prog-dot.done { background: var(--blue); border-color: var(--blue); color: #fff; }
-.prog-label {
-  position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
-  font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.5px;
-  text-transform: uppercase; white-space: nowrap; color: var(--mid); transition: color 0.3s;
-}
-.prog-dot.active .prog-label, .prog-dot.done .prog-label { color: var(--blue); }
-.prog-line { width: 56px; height: 2px; background: var(--border); transition: background 0.3s; }
-.prog-line.done { background: var(--blue); }
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
 
-/* SCREEN */
-.screen { display: none; }
-.screen.active { display: block; animation: fadeUp 0.35s ease both; }
-@keyframes fadeUp { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
+  .logo-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
 
-/* CARD */
-.q-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 1.75rem 2rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-.q-section {
-  font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem;
-}
-.q-text {
-  font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700;
-  color: var(--ink); margin-bottom: 0.35rem; line-height: 1.35;
-}
-.q-sub { font-size: 0.82rem; color: var(--mid); margin-bottom: 1.25rem; line-height: 1.55; }
+  .logo-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid var(--accent);
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
 
-/* FORM */
-.field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--mid); }
-input, select {
-  font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
-  border: 1px solid var(--border); border-radius: 3px;
-  padding: 0.6rem 0.75rem; background: var(--paper); color: var(--ink);
-  outline: none; transition: border-color 0.2s;
-}
-input:focus, select:focus { border-color: var(--blue); background: var(--white); }
+  .lang-toggle {
+    display: flex;
+    gap: 0.25rem;
+  }
 
-/* OPTIONS */
-.options { display: flex; flex-direction: column; gap: 0.6rem; }
-.option {
-  display: flex; align-items: flex-start; gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border); border-radius: 3px;
-  background: var(--paper); cursor: pointer; transition: all 0.18s;
-}
-.option:hover { border-color: var(--blue); background: rgba(26,58,110,0.03); }
-.option.selected { border-color: var(--blue); background: rgba(26,58,110,0.06); }
-.opt-dot {
-  width: 16px; height: 16px; border-radius: 50%;
-  border: 2px solid var(--border); flex-shrink: 0; margin-top: 2px;
-  transition: all 0.18s; display: flex; align-items: center; justify-content: center;
-}
-.option.selected .opt-dot { background: var(--blue); border-color: var(--blue); }
-.option.selected .opt-dot::after { content: ''; width: 5px; height: 5px; background: #fff; border-radius: 50%; }
-.opt-text { font-size: 0.85rem; color: var(--ink); font-weight: 400; line-height: 1.4; }
-.opt-sub { font-size: 0.75rem; color: var(--mid); margin-top: 2px; }
+  .lang-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.6);
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
 
-/* BUTTONS */
-.btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
-.btn-back {
-  background: transparent; border: 1px solid var(--border);
-  color: var(--mid); padding: 0.6rem 1.25rem;
-  font-size: 0.8rem; font-family: 'DM Sans', sans-serif;
-  cursor: pointer; border-radius: 3px; transition: all 0.2s;
-}
-.btn-back:hover { border-color: var(--ink); color: var(--ink); }
-.btn-next {
-  background: var(--blue); border: none; color: #fff;
-  padding: 0.7rem 1.75rem; font-size: 0.82rem; font-weight: 600;
-  font-family: 'DM Sans', sans-serif; cursor: pointer; border-radius: 3px;
-  transition: background 0.2s; letter-spacing: 0.3px;
-}
-.btn-next:hover { background: #1e4a8a; }
-.btn-next:disabled { background: var(--border); cursor: not-allowed; }
+  .lang-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
 
-/* LOADER */
-.loader-wrap {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 4px; padding: 4rem 2rem; text-align: center;
-}
-.loader-ring {
-  width: 44px; height: 44px; border: 3px solid var(--cream);
-  border-top-color: var(--blue); border-radius: 50%;
-  animation: spin 0.9s linear infinite; margin: 0 auto 1.25rem;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.loader-title {
-  font-family: 'Playfair Display', serif; font-size: 1.2rem;
-  font-weight: 700; color: var(--ink); margin-bottom: 0.35rem;
-}
-.loader-sub { font-size: 0.8rem; color: var(--mid); }
+  /* HERO BAND */
+  .hero-band {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+  }
 
-/* RESULTS */
-.result-top {
-  display: grid; grid-template-columns: 160px 1fr; gap: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-@media (max-width: 500px) { .result-top { grid-template-columns: 1fr; } }
-.score-box {
-  background: var(--ink); color: #fff;
-  border-radius: 4px; padding: 1.5rem 1rem;
-  text-align: center;
-}
-.score-label-sm {
-  font-family: 'DM Mono', monospace; font-size: 0.6rem;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,0.45); margin-bottom: 0.75rem;
-}
-.score-num {
-  font-family: 'Playfair Display', serif; font-size: 4rem;
-  font-weight: 900; line-height: 1;
-}
-.score-num.critical { color: var(--red); }
-.score-num.high { color: var(--orange); }
-.score-num.medium { color: #d4ac0d; }
-.score-num.low { color: var(--green); }
-.score-status {
-  font-family: 'DM Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 1.5px; text-transform: uppercase; margin-top: 0.5rem;
-}
-.result-info-box {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 4px; padding: 1.5rem;
-}
-.result-profile {
-  font-family: 'Playfair Display', serif; font-size: 1.4rem;
-  font-weight: 700; color: var(--ink); margin-bottom: 0.5rem;
-}
-.result-summary { font-size: 0.85rem; color: var(--mid); line-height: 1.65; }
+  .hero-band h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
 
-.report-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 4px; padding: 1.75rem 2rem;
-  margin-bottom: 1rem;
-}
-.report-card h3 {
-  font-family: 'DM Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--mid); margin-bottom: 1rem;
-  padding-bottom: 0.75rem; border-bottom: 1px solid var(--cream);
-}
-.report-content {
-  font-size: 0.87rem; color: var(--ink);
-  line-height: 1.8; white-space: pre-wrap;
-  max-height: 55vh; overflow-y: auto;
-}
-.report-content::-webkit-scrollbar { width: 3px; }
-.report-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .hero-band h1 span { color: var(--accent); }
 
-.action-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-.btn-copy {
-  background: transparent; border: 1px solid var(--border);
-  color: var(--mid); padding: 0.6rem 1.25rem;
-  font-size: 0.78rem; font-family: 'DM Sans', sans-serif;
-  cursor: pointer; border-radius: 3px; transition: all 0.2s;
-}
-.btn-copy:hover { border-color: var(--ink); color: var(--ink); }
-.btn-new {
-  background: var(--blue); border: none; color: #fff;
-  padding: 0.6rem 1.25rem; font-size: 0.78rem; font-weight: 600;
-  font-family: 'DM Sans', sans-serif; cursor: pointer; border-radius: 3px;
-  transition: background 0.2s; text-decoration: none;
-  display: inline-flex; align-items: center;
-}
-.btn-new:hover { background: #1e4a8a; }
-.btn-strategix {
-  background: transparent; border: 1px solid var(--blue);
-  color: var(--blue); padding: 0.6rem 1.25rem;
-  font-size: 0.78rem; font-weight: 500;
-  font-family: 'DM Sans', sans-serif; cursor: pointer; border-radius: 3px;
-  transition: all 0.2s; text-decoration: none;
-  display: inline-flex; align-items: center;
-}
-.btn-strategix:hover { background: var(--blue); color: #fff; }
+  .hero-band p {
+    font-size: 0.95rem;
+    color: var(--mid);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
 
-/* FOOTER */
-footer {
-  background: var(--ink); color: rgba(255,255,255,0.3);
-  padding: 1.25rem 2.5rem;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 0.75rem;
-}
-.foot-logo { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.5); }
-.foot-copy { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 1px; }
+  /* MAIN LAYOUT */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
-@media (max-width: 768px) {
-  nav { padding: 0 1.25rem; }
-  .tool { padding: 2rem 1rem 4rem; }
-  .q-card { padding: 1.25rem 1.25rem; }
-  .prog-line { width: 28px; }
-}
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 1.75rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
 
-/* PAYWALL MODAL */
-.paywall-overlay {
-  display: none; position: fixed; inset: 0; z-index: 1000;
-  background: rgba(26,26,46,0.75);
-  align-items: center; justify-content: center; padding: 1rem;
-}
-.paywall-box {
-  background: #fff; border-radius: 6px;
-  max-width: 420px; width: 100%;
-  padding: 2.5rem 2rem; text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-}
-.paywall-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-.paywall-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem; font-weight: 700;
-  color: var(--ink); margin-bottom: 0.5rem;
-}
-.paywall-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.6; margin-bottom: 1.5rem; }
-.paywall-price {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.2rem; font-weight: 900;
-  color: var(--red); margin-bottom: 0.25rem;
-}
-.paywall-price-desc { font-size: 0.78rem; color: var(--mid); margin-bottom: 1.5rem; }
-.btn-paypal {
-  width: 100%; background: #0070ba; color: #fff;
-  border: none; padding: 0.9rem; border-radius: 4px;
-  font-size: 1rem; font-weight: 700; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-  transition: background 0.2s; margin-bottom: 0.75rem;
-}
-.btn-paypal:hover { background: #005ea6; }
-.btn-paypal-cancel {
-  background: transparent; border: none;
-  color: var(--mid); font-size: 0.8rem; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; padding: 0.4rem;
-}
-.usage-counter {
-  font-family: 'DM Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 1px; text-transform: uppercase;
-  color: var(--mid); text-align: right;
-  margin-bottom: 0.5rem; display: none;
-}
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--cream);
+  }
+
+  .card-title .step {
+    background: var(--accent);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* FORM GRID */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--mid);
+  }
+
+  input, select, textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.55rem 0.75rem;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  textarea { resize: vertical; min-height: 80px; }
+
+  /* TOPIC CHIPS */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .chip {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--paper);
+    color: var(--mid);
+    user-select: none;
+  }
+
+  .chip.selected {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  /* ANALYZE BUTTON */
+  .btn-analyze {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.9rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .btn-analyze:hover { background: #a93226; }
+  .btn-analyze:active { transform: scale(0.99); }
+  .btn-analyze:disabled { background: var(--border); cursor: not-allowed; }
+
+  /* LOADING */
+  .loading {
+    display: none;
+    text-align: center;
+    padding: 2.5rem;
+  }
+
+  .loading.visible { display: block; }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--cream);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading p {
+    font-size: 0.85rem;
+    color: var(--mid);
+    font-style: italic;
+  }
+
+  /* RESULTS */
+  .results { display: none; }
+  .results.visible { display: block; }
+
+  .result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .result-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  /* SCORE BADGE */
+  .score-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--ink);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    min-width: 80px;
+  }
+
+  .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .score-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .score-badge.high .score-num { color: #2ecc71; }
+  .score-badge.mid-score .score-num { color: var(--warn); }
+  .score-badge.low .score-num { color: var(--accent); }
+
+  /* RESULT SECTIONS */
+  .result-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .result-sections { grid-template-columns: 1fr; }
+  }
+
+  .result-block {
+    border-radius: 3px;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+  }
+
+  .result-block.green { border-left: 4px solid var(--accent2); }
+  .result-block.red { border-left: 4px solid var(--accent); }
+  .result-block.gold { border-left: 4px solid var(--gold); grid-column: 1 / -1; }
+  .result-block.blue { border-left: 4px solid #2980b9; grid-column: 1 / -1; }
+
+  .result-block h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    margin-bottom: 0.75rem;
+  }
+
+  .result-block .content {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--ink);
+    white-space: pre-wrap;
+  }
+
+  /* DIVIDER */
+  .divider {
+    text-align: center;
+    color: var(--border);
+    font-size: 1.2rem;
+    letter-spacing: 6px;
+    margin: 0.5rem 0;
+  }
+
+  /* RESET */
+  .btn-reset {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--mid);
+    padding: 0.5rem 1.2rem;
+    font-size: 0.82rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    margin-top: 1rem;
+  }
+
+  .btn-reset:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: var(--border);
+    text-transform: uppercase;
+    border-top: 1px solid var(--border);
+  }
+
+  /* PAYWALL MODAL */
+  .paywall-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(26,26,46,0.75);
+    align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .paywall-box {
+    background: #fff;
+    border-radius: 6px;
+    max-width: 420px; width: 100%;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  }
+  .paywall-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .paywall-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.5rem;
+  }
+  .paywall-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.6; margin-bottom: 1.5rem; }
+  .paywall-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900;
+    color: var(--accent); margin-bottom: 0.25rem;
+  }
+  .paywall-price-desc { font-size: 0.78rem; color: var(--mid); margin-bottom: 1.5rem; }
+  .btn-paypal {
+    width: 100%; background: #0070ba; color: #fff;
+    border: none; padding: 0.9rem; border-radius: 4px;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    transition: background 0.2s; margin-bottom: 0.75rem;
+  }
+  .btn-paypal:hover { background: #005ea6; }
+  .btn-paypal-cancel {
+    background: transparent; border: none;
+    color: var(--mid); font-size: 0.8rem; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; padding: 0.4rem;
+  }
+  .usage-counter {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--mid);
+    text-align: right; padding: 0.5rem 0;
+    border-top: 1px solid var(--border);
+    margin-bottom: 0.5rem;
+  }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    <div class="nav-hex">QCL</div>
-    <span class="nav-name">QuantumCyberLabs</span>
-  </a>
-  <div class="nav-badge">Quantum Risk Advisor</div>
-  <a href="index.html" class="nav-back">← Home</a>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">Quantum Risk Assessment · Gratuito</div>
-  <h1>Sei pronto alla<br><em>minaccia quantistica?</em></h1>
-  <p class="hero-p">In meno di 10 minuti valuta la tua esposizione e ricevi un report executive con roadmap di migrazione post-quantum NIST-compliant.</p>
-  <div class="hero-meta">
-    <div class="meta-item"><div class="meta-n">10<span>min</span></div><div class="meta-l">Durata</div></div>
-    <div class="meta-item"><div class="meta-n">NIST<span> ✓</span></div><div class="meta-l">FIPS 203/204/205</div></div>
-    <div class="meta-item"><div class="meta-n">100<span>%</span></div><div class="meta-l">Gratuito</div></div>
-    <div class="meta-item"><div class="meta-n">AI<span>-powered</span></div><div class="meta-l">Report personalizzato</div></div>
+<header>
+  <div class="logo">
+    <span class="logo-main">PoliticaLab</span>
+    <span class="logo-tag">Beta</span>
   </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<div class="hero-band">
+  <h1 data-it="Intelligenza Strategica per la <span>Comunicazione Politica</span>" data-en="Strategic Intelligence for <span>Political Communication</span>"></h1>
+  <p data-it="Inserisci il contesto elettorale e i temi su cui vuoi comunicare. PoliticaLab analizza il territorio, suggerisce il framing più efficace e valuta il tuo posizionamento." data-en="Enter your electoral context and the issues you want to communicate on. PoliticaLab analyzes the territory, suggests the most effective framing, and evaluates your positioning."></p>
 </div>
 
-<!-- TOOL -->
-<div class="tool">
+<div class="main">
 
-  <!-- PROGRESS -->
-  <div class="progress" style="margin-top: 0.5rem;">
-    <div class="prog-step">
-      <div class="prog-dot active" id="pd1" style="position:relative;">1<span class="prog-label">Profilo</span></div>
+  <!-- STEP 1: CONTESTO -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step">1</span>
+      <span data-it="Contesto Elettorale" data-en="Electoral Context"></span>
     </div>
-    <div class="prog-line" id="pl1"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd2" style="position:relative;">2<span class="prog-label">IT</span></div>
-    </div>
-    <div class="prog-line" id="pl2"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd3" style="position:relative;">3<span class="prog-label">Crypto</span></div>
-    </div>
-    <div class="prog-line" id="pl3"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd4" style="position:relative;">4<span class="prog-label">Dati</span></div>
-    </div>
-    <div class="prog-line" id="pl4"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd5" style="position:relative;">5<span class="prog-label">Report</span></div>
-    </div>
-  </div>
-
-  <!-- SCREEN 1: PROFILO -->
-  <div class="screen active" id="screen1">
-    <div class="q-card">
-      <div class="q-section">Sezione 1 · Profilo Organizzazione</div>
-      <div class="q-text">Dimmi qualcosa sulla tua organizzazione</div>
-      <div class="q-sub">Personalizziamo il report in base al tuo settore e contesto normativo.</div>
+    <div class="form-grid">
       <div class="field">
-        <label>Nome organizzazione</label>
-        <input type="text" id="orgName" placeholder="es. Comune di Roma, Banca XYZ, Ministero...">
+        <label data-it="Città / Territorio" data-en="City / Territory"></label>
+        <input type="text" id="city" placeholder="es. Palermo, Catania, Roma..." />
       </div>
       <div class="field">
-        <label>Settore</label>
-        <select id="orgSector">
-          <option value="">Seleziona settore...</option>
-          <option>Pubblica Amministrazione Centrale</option>
-          <option>Pubblica Amministrazione Locale</option>
-          <option>Sanità e Farmaceutica</option>
-          <option>Banche e Finanza</option>
-          <option>Difesa e Sicurezza Nazionale</option>
-          <option>Energia e Utilities</option>
-          <option>Telecomunicazioni</option>
-          <option>Trasporti e Logistica</option>
-          <option>Industria e Manifatturiero</option>
-          <option>Assicurazioni</option>
-          <option>Altro</option>
+        <label data-it="Tipo di elezione" data-en="Election type"></label>
+        <select id="electionType">
+          <option value="" data-it="— Seleziona —" data-en="— Select —"></option>
+          <option value="comunali" data-it="Elezioni Comunali" data-en="Municipal Elections"></option>
+          <option value="regionali" data-it="Elezioni Regionali" data-en="Regional Elections"></option>
+          <option value="politiche" data-it="Elezioni Politiche" data-en="National Elections"></option>
+          <option value="europee" data-it="Elezioni Europee" data-en="European Elections"></option>
         </select>
       </div>
       <div class="field">
-        <label>Dimensione</label>
-        <select id="orgSize">
-          <option value="">Seleziona dimensione...</option>
-          <option>Piccola (meno di 50 dipendenti)</option>
-          <option>Media (50–500 dipendenti)</option>
-          <option>Grande (500–5.000 dipendenti)</option>
-          <option>Enterprise (oltre 5.000 dipendenti)</option>
+        <label data-it="Orientamento politico" data-en="Political orientation"></label>
+        <select id="orientation">
+          <option value="" data-it="— Seleziona —" data-en="— Select —"></option>
+          <option value="centrosinistra" data-it="Centro-sinistra" data-en="Centre-left"></option>
+          <option value="centrodestra" data-it="Centro-destra" data-en="Centre-right"></option>
+          <option value="civica" data-it="Lista civica" data-en="Civic list"></option>
+          <option value="movimento" data-it="Movimento / alternativa" data-en="Movement / alternative"></option>
+          <option value="sinistra" data-it="Sinistra" data-en="Left"></option>
+          <option value="destra" data-it="Destra" data-en="Right"></option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-it="Target demografico" data-en="Target demographic"></label>
+        <select id="demographic">
+          <option value="" data-it="— Seleziona —" data-en="— Select —"></option>
+          <option value="giovani" data-it="Giovani (18–35)" data-en="Young (18–35)"></option>
+          <option value="adulti" data-it="Adulti (35–55)" data-en="Adults (35–55)"></option>
+          <option value="anziani" data-it="Over 55" data-en="Over 55"></option>
+          <option value="famiglie" data-it="Famiglie" data-en="Families"></option>
+          <option value="imprenditori" data-it="Imprenditori / PMI" data-en="Entrepreneurs / SMEs"></option>
+          <option value="generale" data-it="Elettorato generale" data-en="General electorate"></option>
         </select>
       </div>
     </div>
-    <div class="btn-row"><div></div><button class="btn-next" onclick="goTo(2)">Avanti →</button></div>
   </div>
 
-  <!-- SCREEN 2: INFRASTRUTTURA -->
-  <div class="screen" id="screen2">
-    <div class="q-card">
-      <div class="q-section">Sezione 2 · Infrastruttura IT</div>
-      <div class="q-text">Qual è il vostro livello di consapevolezza sulla minaccia quantistica?</div>
-      <div class="options" id="q2a">
-        <div class="option" onclick="sel('q2a',this,0)"><div class="opt-dot"></div><div><div class="opt-text">Non ne abbiamo mai sentito parlare</div><div class="opt-sub">Consapevolezza: nulla</div></div></div>
-        <div class="option" onclick="sel('q2a',this,1)"><div class="opt-dot"></div><div><div class="opt-text">Ne siamo a conoscenza ma non abbiamo preso iniziative</div><div class="opt-sub">Consapevolezza: bassa</div></div></div>
-        <div class="option" onclick="sel('q2a',this,2)"><div class="opt-dot"></div><div><div class="opt-text">Abbiamo fatto un'analisi preliminare interna</div><div class="opt-sub">Consapevolezza: media</div></div></div>
-        <div class="option" onclick="sel('q2a',this,3)"><div class="opt-dot"></div><div><div class="opt-text">Abbiamo già un piano di migrazione post-quantum</div><div class="opt-sub">Consapevolezza: alta</div></div></div>
-      </div>
+  <!-- STEP 2: TEMI -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step">2</span>
+      <span data-it="Temi su cui vuoi comunicare" data-en="Issues you want to communicate on"></span>
     </div>
-    <div class="q-card">
-      <div class="q-section">Sezione 2 · Infrastruttura IT</div>
-      <div class="q-text">Quanti sistemi critici utilizza la vostra organizzazione?</div>
-      <div class="options" id="q2b">
-        <div class="option" onclick="sel('q2b',this,3)"><div class="opt-dot"></div><div class="opt-text">Meno di 10 sistemi critici</div></div>
-        <div class="option" onclick="sel('q2b',this,2)"><div class="opt-dot"></div><div class="opt-text">10–50 sistemi critici</div></div>
-        <div class="option" onclick="sel('q2b',this,1)"><div class="opt-dot"></div><div class="opt-text">50–200 sistemi critici</div></div>
-        <div class="option" onclick="sel('q2b',this,0)"><div class="opt-dot"></div><div class="opt-text">Oltre 200 sistemi critici</div></div>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="goTo(1)">← Indietro</button>
-      <button class="btn-next" onclick="goTo(3)">Avanti →</button>
-    </div>
+    <div class="chips" id="topicChips"></div>
   </div>
 
-  <!-- SCREEN 3: CRITTOGRAFIA -->
-  <div class="screen" id="screen3">
-    <div class="q-card">
-      <div class="q-section">Sezione 3 · Crittografia</div>
-      <div class="q-text">Quali algoritmi crittografici utilizza attualmente la vostra organizzazione?</div>
-      <div class="options" id="q3a">
-        <div class="option" onclick="sel('q3a',this,0)"><div class="opt-dot"></div><div><div class="opt-text">RSA (RSA-2048, RSA-4096)</div><div class="opt-sub">⚠️ Vulnerabile agli attacchi quantistici</div></div></div>
-        <div class="option" onclick="sel('q3a',this,0)"><div class="opt-dot"></div><div><div class="opt-text">ECC — Elliptic Curve Cryptography</div><div class="opt-sub">⚠️ Vulnerabile agli attacchi quantistici</div></div></div>
-        <div class="option" onclick="sel('q3a',this,1)"><div class="opt-dot"></div><div><div class="opt-text">AES-256</div><div class="opt-sub">✓ Resistente con chiavi lunghe</div></div></div>
-        <div class="option" onclick="sel('q3a',this,2)"><div class="opt-dot"></div><div><div class="opt-text">Standard NIST post-quantum (CRYSTALS-Kyber, Dilithium)</div><div class="opt-sub">✓ Resistente agli attacchi quantistici</div></div></div>
-        <div class="option" onclick="sel('q3a',this,1)"><div class="opt-dot"></div><div><div class="opt-text">Non lo so / Da verificare</div><div class="opt-sub">⚠️ Richiede audit immediato</div></div></div>
-      </div>
+  <!-- STEP 3: MESSAGGIO -->
+  <div class="card">
+    <div class="card-title">
+      <span class="step">3</span>
+      <span data-it="Il tuo messaggio (opzionale)" data-en="Your message (optional)"></span>
     </div>
-    <div class="q-card">
-      <div class="q-section">Sezione 3 · Crittografia</div>
-      <div class="q-text">Avete un inventario dei sistemi che usano crittografia?</div>
-      <div class="options" id="q3b">
-        <div class="option" onclick="sel('q3b',this,0)"><div class="opt-dot"></div><div class="opt-text">No, non abbiamo un inventario crittografico</div></div>
-        <div class="option" onclick="sel('q3b',this,1)"><div class="opt-dot"></div><div class="opt-text">Inventario parziale (meno del 50% dei sistemi)</div></div>
-        <div class="option" onclick="sel('q3b',this,2)"><div class="opt-dot"></div><div class="opt-text">Inventario parziale (oltre il 50% dei sistemi)</div></div>
-        <div class="option" onclick="sel('q3b',this,3)"><div class="opt-dot"></div><div class="opt-text">Sì, inventario completo e aggiornato</div></div>
+    <div class="form-grid">
+      <div class="field">
+        <label data-it="Tipo di contenuto" data-en="Content type"></label>
+        <select id="contentType">
+          <option value="post_social" data-it="Post social media" data-en="Social media post"></option>
+          <option value="discorso" data-it="Discorso / comizio" data-en="Speech / rally"></option>
+          <option value="comunicato" data-it="Comunicato stampa" data-en="Press release"></option>
+          <option value="volantino" data-it="Volantino / manifesto" data-en="Flyer / poster"></option>
+          <option value="intervista" data-it="Intervista" data-en="Interview"></option>
+        </select>
       </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="goTo(2)">← Indietro</button>
-      <button class="btn-next" onclick="goTo(4)">Avanti →</button>
+      <div class="field full">
+        <label data-it="Bozza del tuo messaggio (lascia vuoto per ricevere solo suggerimenti)" data-en="Draft of your message (leave empty to receive suggestions only)"></label>
+        <textarea id="userMessage" placeholder="Scrivi qui il tuo messaggio da analizzare..."></textarea>
+      </div>
     </div>
   </div>
 
-  <!-- SCREEN 4: DATI -->
-  <div class="screen" id="screen4">
-    <div class="q-card">
-      <div class="q-section">Sezione 4 · Esposizione Dati</div>
-      <div class="q-text">Che tipo di dati sensibili tratta la vostra organizzazione?</div>
-      <div class="options" id="q4a">
-        <div class="option" onclick="sel('q4a',this,1)"><div class="opt-dot"></div><div class="opt-text">Dati personali comuni (GDPR)</div></div>
-        <div class="option" onclick="sel('q4a',this,0)"><div class="opt-dot"></div><div class="opt-text">Dati sanitari o biometrici</div></div>
-        <div class="option" onclick="sel('q4a',this,0)"><div class="opt-dot"></div><div class="opt-text">Dati finanziari e bancari</div></div>
-        <div class="option" onclick="sel('q4a',this,0)"><div class="opt-dot"></div><div class="opt-text">Segreti di stato o informazioni classificate</div></div>
-        <div class="option" onclick="sel('q4a',this,2)"><div class="opt-dot"></div><div class="opt-text">Dati operativi non sensibili</div></div>
-      </div>
-    </div>
-    <div class="q-card">
-      <div class="q-section">Sezione 4 · Esposizione Dati</div>
-      <div class="q-text">Per quanti anni i vostri dati devono rimanere confidenziali?</div>
-      <div class="q-sub">Questa è la domanda chiave per valutare il rischio HNDL (Harvest Now, Decrypt Later).</div>
-      <div class="options" id="q4b">
-        <div class="option" onclick="sel('q4b',this,3)"><div class="opt-dot"></div><div><div class="opt-text">Meno di 5 anni</div><div class="opt-sub">Rischio HNDL: basso</div></div></div>
-        <div class="option" onclick="sel('q4b',this,2)"><div class="opt-dot"></div><div><div class="opt-text">5–10 anni</div><div class="opt-sub">Rischio HNDL: medio</div></div></div>
-        <div class="option" onclick="sel('q4b',this,1)"><div class="opt-dot"></div><div><div class="opt-text">10–25 anni</div><div class="opt-sub">Rischio HNDL: alto — migrazione urgente</div></div></div>
-        <div class="option" onclick="sel('q4b',this,0)"><div class="opt-dot"></div><div><div class="opt-text">Oltre 25 anni o indefinitamente</div><div class="opt-sub">Rischio HNDL: critico — azione immediata</div></div></div>
-      </div>
-    </div>
-    <div id="usageCounter" class="usage-counter"></div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="goTo(3)">← Indietro</button>
-      <button class="btn-next" onclick="generateReport()">⚡ Genera Report →</button>
-    </div>
+  <div class="usage-counter" id="usageCounter" style="display:none;"></div>
+  <!-- ANALYZE BUTTON -->
+  <button class="btn-analyze" id="analyzeBtn" onclick="analyze()">
+    <span>⚡</span>
+    <span data-it="Analizza e genera strategia" data-en="Analyze and generate strategy"></span>
+  </button>
+
+  <!-- LOADING -->
+  <div class="loading card" id="loading">
+    <div class="spinner"></div>
+    <p data-it="PoliticaLab sta elaborando l'analisi strategica..." data-en="PoliticaLab is processing the strategic analysis..."></p>
   </div>
 
-  <!-- SCREEN 5: RISULTATI -->
-  <div class="screen" id="screen5">
-    <div class="loader-wrap" id="loaderWrap">
-      <div class="loader-ring"></div>
-      <div class="loader-title">Analisi in corso...</div>
-      <div class="loader-sub">Calcolo score · Analisi gap NIST · Generazione roadmap</div>
-    </div>
-
-    <div id="resultWrap" style="display:none;">
-      <div class="result-top">
-        <div class="score-box">
-          <div class="score-label-sm">Risk Score</div>
-          <div class="score-num" id="scoreNum">--</div>
-          <div class="score-status" id="scoreStatus"></div>
-        </div>
-        <div class="result-info-box">
-          <div class="result-profile" id="resultProfile"></div>
-          <div class="result-summary" id="resultSummary"></div>
-        </div>
-      </div>
-
-      <div class="report-card">
-        <h3>Report Executive — Quantum Risk Assessment</h3>
-        <div class="report-content" id="reportBox"></div>
-      </div>
-
-      <div class="action-row">
-        <button class="btn-copy" id="btnCopy" onclick="copyReport()">📋 Copia Report</button>
-        <button class="btn-new" onclick="resetAll()">+ Nuova Valutazione</button>
-        <a href="https://qstrategix.com" target="_blank" class="btn-strategix">Q-STRATEGIX →</a>
+  <!-- RESULTS -->
+  <div class="results card" id="results">
+    <div class="result-header">
+      <h2 data-it="Analisi Strategica" data-en="Strategic Analysis"></h2>
+      <div class="score-badge" id="scoreBadge">
+        <span class="score-num" id="scoreNum">—</span>
+        <span class="score-label" data-it="Efficacia" data-en="Effectiveness"></span>
       </div>
     </div>
+
+    <div class="result-sections">
+      <div class="result-block green">
+        <h3 data-it="✅ Framing Consigliato" data-en="✅ Recommended Framing"></h3>
+        <div class="content" id="resFraming">—</div>
+      </div>
+      <div class="result-block red">
+        <h3 data-it="⚠️ Parole / Temi a Rischio" data-en="⚠️ Risky Words / Issues"></h3>
+        <div class="content" id="resRisks">—</div>
+      </div>
+      <div class="result-block gold">
+        <h3 data-it="🎯 Messaggi Chiave Pronti" data-en="🎯 Ready-to-Use Key Messages"></h3>
+        <div class="content" id="resMessages">—</div>
+      </div>
+      <div class="result-block blue">
+        <h3 data-it="📊 Valutazione Strategica" data-en="📊 Strategic Assessment"></h3>
+        <div class="content" id="resAssessment">—</div>
+      </div>
+    </div>
+
+    <div class="divider">· · ·</div>
+
+    <button class="btn-reset" onclick="resetForm()" data-it="← Nuova analisi" data-en="← New analysis"></button>
   </div>
 
 </div>
 
 <footer>
-  <div class="foot-logo">QuantumCyberLabs</div>
-  <div class="foot-copy">© 2025 QuantumCyberLabs · Powered by Claude AI</div>
+  <span data-it="PoliticaLab — Political Intelligence Advisor — Powered by AI" data-en="PoliticaLab — Political Intelligence Advisor — Powered by AI"></span>
 </footer>
 
 <script>
+// ─── LANGUAGE ─────────────────────────────────────────────────────────────────
+let currentLang = 'it';
 
-const PAYPAL_URL = 'https://www.paypal.com/ncp/payment/TSU6JFQ7WTJVS';
-const FREE_LIMIT = 1;
-const PAID_ANALYSES = 10;
+const topics = {
+  it: ['Sicurezza urbana','Lavoro e occupazione','Sanità locale','Tasse e tributi',
+       'Ambiente e verde pubblico','Mobilità e trasporti','Immigrazione','Scuola e istruzione',
+       'Giovani e futuro','Turismo e cultura','Imprese e commercio','Welfare e sociale',
+       'Corruzione e legalità','Casa e affitti','Digitalizzazione PA'],
+  en: ['Urban security','Jobs and employment','Local healthcare','Taxes and fees',
+       'Environment and green spaces','Mobility and transport','Immigration','Schools and education',
+       'Youth and future','Tourism and culture','Business and trade','Welfare and social',
+       'Corruption and legality','Housing and rents','PA digitalization']
+};
 
-function getUsage() { return parseInt(localStorage.getItem('qra_usage') || '0'); }
-function getPaid() { return parseInt(localStorage.getItem('qra_paid') || '0'); }
-function canAnalyze() { return getUsage() < FREE_LIMIT + getPaid(); }
-function showPaywallModal() { document.getElementById('paywallModal').style.display = 'flex'; }
-function closePaywall() { document.getElementById('paywallModal').style.display = 'none'; }
-function goToPayPal() {
-  localStorage.setItem('qra_paid', getPaid() + PAID_ANALYSES);
-  window.open(PAYPAL_URL, '_blank');
-  closePaywall();
-}
-function updateCounter() {
-  const remaining = Math.max(0, FREE_LIMIT + getPaid() - getUsage());
-  const el = document.getElementById('usageCounter');
-  if (el) { el.textContent = 'Report rimanenti: ' + remaining; el.style.display = 'block'; }
-}
+let selectedTopics = [];
 
-let answers = {};
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
 
-function sel(groupId, el, score) {
-  document.querySelectorAll('#' + groupId + ' .option').forEach(o => o.classList.remove('selected'));
-  el.classList.add('selected');
-  answers[groupId] = score;
-}
-
-function goTo(step) {
-  for (let i = 1; i <= 5; i++) {
-    document.getElementById('screen' + i).classList.toggle('active', i === step);
-    const pd = document.getElementById('pd' + i);
-    if (!pd) continue;
-    if (i < step) {
-      pd.classList.add('done'); pd.classList.remove('active');
-      pd.childNodes[0].nodeValue = '✓';
-    } else if (i === step) {
-      pd.classList.remove('done'); pd.classList.add('active');
-      if (pd.childNodes[0].nodeValue === '✓') pd.childNodes[0].nodeValue = i;
+  // Update all [data-it] / [data-en] elements
+  document.querySelectorAll('[data-it]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (el.tagName === 'OPTION') {
+      el.textContent = txt;
+    } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      // skip
     } else {
-      pd.classList.remove('done', 'active');
-      if (pd.childNodes[0].nodeValue === '✓') pd.childNodes[0].nodeValue = i;
+      el.innerHTML = txt;
     }
-    if (i <= 4) {
-      const pl = document.getElementById('pl' + i);
-      if (pl) pl.classList.toggle('done', i < step);
-    }
+  });
+
+  // Rebuild chips
+  buildChips();
+
+  // Update select options
+  document.querySelectorAll('select option[data-it]').forEach(opt => {
+    opt.textContent = opt.getAttribute('data-' + lang);
+  });
+
+  // Update textarea placeholder
+  document.getElementById('userMessage').placeholder =
+    lang === 'it' ? 'Scrivi qui il tuo messaggio da analizzare...' : 'Write your message to analyze here...';
+}
+
+function buildChips() {
+  const container = document.getElementById('topicChips');
+  container.innerHTML = '';
+  topics[currentLang].forEach((t, i) => {
+    const div = document.createElement('div');
+    div.className = 'chip' + (selectedTopics.includes(i) ? ' selected' : '');
+    div.textContent = t;
+    div.onclick = () => toggleTopic(i, div);
+    container.appendChild(div);
+  });
+}
+
+function toggleTopic(i, el) {
+  if (selectedTopics.includes(i)) {
+    selectedTopics = selectedTopics.filter(x => x !== i);
+    el.classList.remove('selected');
+  } else {
+    selectedTopics.push(i);
+    el.classList.add('selected');
   }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function calcScore() {
-  const vals = Object.values(answers);
-  if (!vals.length) return 25;
-  return Math.round((vals.reduce((a,b) => a+b, 0) / vals.length / 3) * 100);
-}
+// ─── ANALYZE ──────────────────────────────────────────────────────────────────
+async function analyze() {
+  const city = document.getElementById('city').value.trim();
+  const electionType = document.getElementById('electionType').value;
+  const orientation = document.getElementById('orientation').value;
+  const demographic = document.getElementById('demographic').value;
+  const contentType = document.getElementById('contentType').value;
+  const userMessage = document.getElementById('userMessage').value.trim();
+  const selectedThemes = selectedTopics.map(i => topics[currentLang][i]);
 
-async function generateReport() {
-  if (!canAnalyze()) { showPaywallModal(); return; }
-  goTo(5);
-  document.getElementById('loaderWrap').style.display = 'block';
-  document.getElementById('resultWrap').style.display = 'none';
+  // PAYWALL CHECK
+  if (!canAnalyze()) {
+    showPaywallModal();
+    return;
+  }
 
-  const score = calcScore();
-  const orgName = document.getElementById('orgName').value || 'Organizzazione';
-  const sector = document.getElementById('orgSector').value || 'Generico';
-  const size = document.getElementById('orgSize').value || 'Non specificata';
-  const riskLevel = score >= 75 ? 'BASSO' : score >= 50 ? 'MEDIO' : score >= 25 ? 'ALTO' : 'CRITICO';
-  const profile = score >= 75 ? 'Quantum Ready' : score >= 50 ? 'In Transizione' : score >= 25 ? 'Vulnerabile' : 'Esposizione Critica';
+  if (!city) {
+    alert(currentLang === 'it' ? 'Inserisci la città o il territorio.' : 'Please enter a city or territory.');
+    return;
+  }
+  if (selectedThemes.length === 0) {
+    alert(currentLang === 'it' ? 'Seleziona almeno un tema.' : 'Select at least one topic.');
+    return;
+  }
 
-  const prompt = `Sei un esperto certificato NIST di cybersecurity post-quantistica. Genera un report executive di Quantum Risk Assessment per:
+  document.getElementById('analyzeBtn').disabled = true;
+  document.getElementById('loading').classList.add('visible');
+  document.getElementById('results').classList.remove('visible');
 
-ORGANIZZAZIONE: ${orgName}
-SETTORE: ${sector}
-DIMENSIONE: ${size}
-QUANTUM RISK SCORE: ${score}/100
-LIVELLO DI RISCHIO: ${riskLevel}
-PROFILO: ${profile}
+  const langInstruction = currentLang === 'it'
+    ? 'Rispondi ESCLUSIVAMENTE in italiano.'
+    : 'Reply EXCLUSIVELY in English.';
 
-RISPOSTE ASSESSMENT:
-- Consapevolezza quantistica: ${answers['q2a'] !== undefined ? ['Nulla','Bassa','Media','Alta'][answers['q2a']] : 'N/D'}
-- Sistemi critici: ${answers['q2b'] !== undefined ? ['Oltre 200','50-200','10-50','Meno di 10'][answers['q2b']] : 'N/D'}
-- Inventario crittografico: ${answers['q3b'] !== undefined ? ['Assente','Parziale <50%','Parziale >50%','Completo'][answers['q3b']] : 'N/D'}
-- Tipologia dati: ${answers['q4a'] !== undefined ? ['Alta (classificati)','Alta (sanitari)','Alta (finanziari)','Media (GDPR)','Bassa (operativi)'][answers['q4a']] : 'N/D'}
-- Periodo confidenzialità: ${answers['q4b'] !== undefined ? ['> 25 anni','10-25 anni','5-10 anni','< 5 anni'][answers['q4b']] : 'N/D'}
+  const prompt = `${langInstruction}
 
-Genera il report con questa struttura:
+Sei PoliticaLab, un advisor di intelligenza strategica per la comunicazione politica locale.
 
-1. EXECUTIVE SUMMARY
-2. ANALISI DEL RISCHIO
-   - Vulnerabilità identificate
-   - Rischio HNDL (Harvest Now, Decrypt Later)
-   - Gap vs standard NIST FIPS 203/204/205
-3. IMPATTO NORMATIVO (NIS2, ACN, GDPR)
-4. ROADMAP DI MIGRAZIONE
-   - Fase 1 (0–6 mesi): Azioni immediate
-   - Fase 2 (6–18 mesi): Migrazione core
-   - Fase 3 (18–36 mesi): Completamento e certificazione
-5. PRIORITÀ DI INTERVENTO
-6. KPI E METRICHE DI SUCCESSO
+CONTESTO:
+- Città/Territorio: ${city}
+- Tipo elezione: ${electionType || 'non specificato'}
+- Orientamento politico: ${orientation || 'non specificato'}
+- Target demografico: ${demographic || 'generale'}
+- Temi selezionati: ${selectedThemes.join(', ')}
+- Tipo di contenuto: ${contentType}
+${userMessage ? `- Bozza messaggio dell'utente: "${userMessage}"` : '- Nessuna bozza fornita (genera suggerimenti da zero)'}
 
-Tono professionale, specifico per il settore, con riferimenti agli standard NIST.`;
+Analizza il contesto e rispondi con ESATTAMENTE questo formato JSON (senza markdown, solo JSON puro):
+
+{
+  "score": <numero intero da 1 a 100 che rappresenta l'efficacia comunicativa stimata>,
+  "framing": "<2-4 paragrafi su come affrontare i temi selezionati: angolo narrativo, tono, approccio consigliato per il territorio e target indicato>",
+  "risks": "<elenco puntato con • di 4-6 parole, concetti o posizionamenti da evitare assolutamente, con breve spiegazione del perché>",
+  "messages": "<3-5 messaggi chiave pronti all'uso, numerati, adatti al tipo di contenuto selezionato>",
+  "assessment": "<valutazione strategica complessiva: punti di forza del posizionamento, rischi principali, raccomandazioni per la campagna>"
+}`;
 
   try {
     const response = await fetch('https://q-strategix-backend-1-0w5h.onrender.com/api/analyze', {
@@ -688,66 +743,111 @@ Tono professionale, specifico per il settore, con riferimenti agli standard NIST
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt })
     });
+
     const data = await response.json();
-    const report = data.result || '';
+    const raw = data.result || '';
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
 
-    localStorage.setItem('qra_usage', getUsage() + 1);
-    updateCounter();
-    document.getElementById('loaderWrap').style.display = 'none';
-    document.getElementById('resultWrap').style.display = 'block';
+    // Populate results
+    document.getElementById('resFraming').textContent = parsed.framing || '—';
+    document.getElementById('resRisks').textContent = parsed.risks || '—';
+    document.getElementById('resMessages').textContent = parsed.messages || '—';
+    document.getElementById('resAssessment').textContent = parsed.assessment || '—';
 
-    const scoreEl = document.getElementById('scoreNum');
-    scoreEl.textContent = score;
-    scoreEl.className = 'score-num ' + (score >= 75 ? 'low' : score >= 50 ? 'medium' : score >= 25 ? 'high' : 'critical');
-    document.getElementById('scoreStatus').textContent = riskLevel;
-    document.getElementById('scoreStatus').style.color = score >= 75 ? '#2ecc71' : score >= 50 ? '#d4ac0d' : score >= 25 ? '#d35400' : '#c0392b';
-    document.getElementById('resultProfile').textContent = profile;
-    document.getElementById('resultSummary').textContent = score >= 75
-      ? 'Buona postura quantum. Monitora gli aggiornamenti NIST e completa la migrazione dei sistemi rimanenti.'
-      : score >= 50
-      ? 'Fase di transizione. Accelera la migrazione per rispettare le deadline NIST 2030.'
-      : score >= 25
-      ? 'Vulnerabilità significative rilevate. Piano di migrazione urgente necessario.'
-      : 'Esposizione critica. I dati sensibili sono a rischio HNDL. Azione immediata richiesta.';
-    document.getElementById('reportBox').textContent = report;
-  } catch(e) {
-    localStorage.setItem('qra_usage', getUsage() + 1);
+    const score = parseInt(parsed.score) || 0;
+    document.getElementById('scoreNum').textContent = score;
+    const badge = document.getElementById('scoreBadge');
+    badge.classList.remove('high', 'mid-score', 'low');
+    if (score >= 70) badge.classList.add('high');
+    else if (score >= 40) badge.classList.add('mid-score');
+    else badge.classList.add('low');
+
+    localStorage.setItem('pl_usage', getUsage() + 1);
     updateCounter();
-    document.getElementById('loaderWrap').style.display = 'none';
-    document.getElementById('resultWrap').style.display = 'block';
-    document.getElementById('reportBox').textContent = 'Errore di connessione. Riprova tra qualche istante.\n\n' + e.message;
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+
+  } catch (err) {
+    alert(currentLang === 'it'
+      ? 'Errore nell\'analisi. Riprova tra qualche istante.'
+      : 'Analysis error. Please try again in a moment.');
+    console.error(err);
+  } finally {
+    document.getElementById('loading').classList.remove('visible');
+    document.getElementById('analyzeBtn').disabled = false;
   }
 }
 
-function copyReport() {
-  navigator.clipboard.writeText(document.getElementById('reportBox').textContent);
-  const btn = document.getElementById('btnCopy');
-  btn.textContent = '✓ Copiato!';
-  setTimeout(() => btn.textContent = '📋 Copia Report', 2000);
+function resetForm() {
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('city').value = '';
+  document.getElementById('electionType').value = '';
+  document.getElementById('orientation').value = '';
+  document.getElementById('demographic').value = '';
+  document.getElementById('userMessage').value = '';
+  selectedTopics = [];
+  buildChips();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function resetAll() {
-  answers = {};
-  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-  ['orgName','orgSector','orgSize'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-  goTo(1);
+
+// ─── PAYPAL GATE ──────────────────────────────────────────────────────────────
+const PAYPAL_URL = 'https://www.paypal.com/ncp/payment/TSU6JFQ7WTJVS';
+const FREE_LIMIT = 1;
+const PAID_ANALYSES = 10;
+
+function getUsage() { return parseInt(localStorage.getItem('pl_usage') || '0'); }
+function getPaid() { return parseInt(localStorage.getItem('pl_paid') || '0'); }
+function canAnalyze() {
+  return getUsage() < FREE_LIMIT + getPaid();
 }
+function showPaywallModal() {
+  document.getElementById('paywallModal').style.display = 'flex';
+  // update modal text for current lang
+  document.querySelectorAll('#paywallModal [data-it]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + currentLang);
+  });
+}
+function closePaywall() {
+  document.getElementById('paywallModal').style.display = 'none';
+}
+function goToPayPal() {
+  localStorage.setItem('pl_paid', getPaid() + PAID_ANALYSES);
+  window.open(PAYPAL_URL, '_blank');
+  closePaywall();
+}
+function updateCounter() {
+  const used = getUsage();
+  const total = FREE_LIMIT + getPaid();
+  const remaining = Math.max(0, total - used);
+  const el = document.getElementById('usageCounter');
+  if (el) {
+    el.textContent = currentLang === 'it'
+      ? `Analisi rimanenti: ${remaining}`
+      : `Remaining analyses: ${remaining}`;
+    el.style.display = 'block';
+  }
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+buildChips();
+setLang('it');
 </script>
 
+<!-- PAYWALL MODAL -->
 <div class="paywall-overlay" id="paywallModal">
   <div class="paywall-box">
     <div class="paywall-icon">🔒</div>
-    <div class="paywall-title">Assessment gratuito esaurito</div>
-    <p class="paywall-desc">Hai utilizzato il tuo assessment gratuito. Sblocca 10 report aggiuntivi con un unico pagamento.</p>
+    <div class="paywall-title" data-it="Analisi gratuita esaurita" data-en="Free analysis used"></div>
+    <p class="paywall-desc" data-it="Hai utilizzato la tua analisi gratuita. Sblocca 10 analisi aggiuntive con un unico pagamento." data-en="You have used your free analysis. Unlock 10 additional analyses with a single payment."></p>
     <div class="paywall-price">€4,99</div>
-    <div class="paywall-price-desc">10 report · pagamento unico · nessun abbonamento</div>
+    <div class="paywall-price-desc" data-it="10 analisi · pagamento unico · nessun abbonamento" data-en="10 analyses · one-time payment · no subscription"></div>
     <button class="btn-paypal" onclick="goToPayPal()">
-      <span>💳</span> Paga con PayPal
+      <span>💳</span>
+      <span data-it="Paga con PayPal" data-en="Pay with PayPal"></span>
     </button>
-    <button class="btn-paypal-cancel" onclick="closePaywall()">Annulla</button>
+    <button class="btn-paypal-cancel" onclick="closePaywall()" data-it="Annulla" data-en="Cancel"></button>
   </div>
 </div>
 
