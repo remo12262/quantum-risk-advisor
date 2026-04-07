@@ -309,6 +309,52 @@ footer {
   .q-card { padding: 1.25rem 1.25rem; }
   .prog-line { width: 28px; }
 }
+
+/* PAYWALL MODAL */
+.paywall-overlay {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(26,26,46,0.75);
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.paywall-box {
+  background: #fff; border-radius: 6px;
+  max-width: 420px; width: 100%;
+  padding: 2.5rem 2rem; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+.paywall-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.paywall-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 0.5rem;
+}
+.paywall-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.6; margin-bottom: 1.5rem; }
+.paywall-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 900;
+  color: var(--red); margin-bottom: 0.25rem;
+}
+.paywall-price-desc { font-size: 0.78rem; color: var(--mid); margin-bottom: 1.5rem; }
+.btn-paypal {
+  width: 100%; background: #0070ba; color: #fff;
+  border: none; padding: 0.9rem; border-radius: 4px;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  transition: background 0.2s; margin-bottom: 0.75rem;
+}
+.btn-paypal:hover { background: #005ea6; }
+.btn-paypal-cancel {
+  background: transparent; border: none;
+  color: var(--mid); font-size: 0.8rem; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; padding: 0.4rem;
+}
+.usage-counter {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--mid); text-align: right;
+  margin-bottom: 0.5rem; display: none;
+}
 </style>
 </head>
 <body>
@@ -483,6 +529,7 @@ footer {
         <div class="option" onclick="sel('q4b',this,0)"><div class="opt-dot"></div><div><div class="opt-text">Oltre 25 anni o indefinitamente</div><div class="opt-sub">Rischio HNDL: critico — azione immediata</div></div></div>
       </div>
     </div>
+    <div id="usageCounter" class="usage-counter"></div>
     <div class="btn-row">
       <button class="btn-back" onclick="goTo(3)">← Indietro</button>
       <button class="btn-next" onclick="generateReport()">⚡ Genera Report →</button>
@@ -531,6 +578,27 @@ footer {
 </footer>
 
 <script>
+
+const PAYPAL_URL = 'https://www.paypal.com/ncp/payment/TSU6JFQ7WTJVS';
+const FREE_LIMIT = 1;
+const PAID_ANALYSES = 10;
+
+function getUsage() { return parseInt(localStorage.getItem('qra_usage') || '0'); }
+function getPaid() { return parseInt(localStorage.getItem('qra_paid') || '0'); }
+function canAnalyze() { return getUsage() < FREE_LIMIT + getPaid(); }
+function showPaywallModal() { document.getElementById('paywallModal').style.display = 'flex'; }
+function closePaywall() { document.getElementById('paywallModal').style.display = 'none'; }
+function goToPayPal() {
+  localStorage.setItem('qra_paid', getPaid() + PAID_ANALYSES);
+  window.open(PAYPAL_URL, '_blank');
+  closePaywall();
+}
+function updateCounter() {
+  const remaining = Math.max(0, FREE_LIMIT + getPaid() - getUsage());
+  const el = document.getElementById('usageCounter');
+  if (el) { el.textContent = 'Report rimanenti: ' + remaining; el.style.display = 'block'; }
+}
+
 let answers = {};
 
 function sel(groupId, el, score) {
@@ -569,6 +637,7 @@ function calcScore() {
 }
 
 async function generateReport() {
+  if (!canAnalyze()) { showPaywallModal(); return; }
   goTo(5);
   document.getElementById('loaderWrap').style.display = 'block';
   document.getElementById('resultWrap').style.display = 'none';
@@ -622,6 +691,8 @@ Tono professionale, specifico per il settore, con riferimenti agli standard NIST
     const data = await response.json();
     const report = data.result || '';
 
+    localStorage.setItem('qra_usage', getUsage() + 1);
+    updateCounter();
     document.getElementById('loaderWrap').style.display = 'none';
     document.getElementById('resultWrap').style.display = 'block';
 
@@ -640,6 +711,8 @@ Tono professionale, specifico per il settore, con riferimenti agli standard NIST
       : 'Esposizione critica. I dati sensibili sono a rischio HNDL. Azione immediata richiesta.';
     document.getElementById('reportBox').textContent = report;
   } catch(e) {
+    localStorage.setItem('qra_usage', getUsage() + 1);
+    updateCounter();
     document.getElementById('loaderWrap').style.display = 'none';
     document.getElementById('resultWrap').style.display = 'block';
     document.getElementById('reportBox').textContent = 'Errore di connessione. Riprova tra qualche istante.\n\n' + e.message;
@@ -663,5 +736,21 @@ function resetAll() {
   goTo(1);
 }
 </script>
+
+<div class="paywall-overlay" id="paywallModal">
+  <div class="paywall-box">
+    <div class="paywall-icon">🔒</div>
+    <div class="paywall-title">Assessment gratuito esaurito</div>
+    <p class="paywall-desc">Hai utilizzato il tuo assessment gratuito. Sblocca 10 report aggiuntivi con un unico pagamento.</p>
+    <div class="paywall-price">€4,99</div>
+    <div class="paywall-price-desc">10 report · pagamento unico · nessun abbonamento</div>
+    <button class="btn-paypal" onclick="goToPayPal()">
+      <span>💳</span> Paga con PayPal
+    </button>
+    <button class="btn-paypal-cancel" onclick="closePaywall()">Annulla</button>
+  </div>
+</div>
+
 </body>
 </html>
+
