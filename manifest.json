@@ -8,6 +8,22 @@
   "background_color": "#f5f0e8",
   "theme_color": "#1a1a2e",
   "orientation": "portrait",
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "PoliticaLab Desktop"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "PoliticaLab Mobile"
+    }
+  ],
   "icons": [
     {
       "src": "/icon-192.png",
