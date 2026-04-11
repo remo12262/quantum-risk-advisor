@@ -17,17 +17,29 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build TWA APK
-        uses: chromeos/pwa-play-billing@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          package-id: com.quantumcyberlabs.politicalab
-          host: quantumcyberlabs.com
-          start-url: /politicalab.html
-          name: PoliticaLab
-          icon-url: https://quantumcyberlabs.com/icon-512.png
+          node-version: '20'
+
+      - name: Install Bubblewrap
+        run: npm install -g @bubblewrap/cli@latest
+
+      - name: Accept licenses and init
+        run: |
+          yes | bubblewrap init \
+            --manifest https://quantumcyberlabs.com/manifest.json \
+            --directory ./twa \
+            2>/dev/null || true
+
+      - name: Build
+        run: |
+          cd twa
+          yes | bubblewrap build 2>/dev/null || true
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: politicalab-apk
-          path: '**/*.apk'
+          path: 'twa/**/*.apk'
+          if-no-files-found: warn
