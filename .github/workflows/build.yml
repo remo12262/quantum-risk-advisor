@@ -9,26 +9,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
-          
+
       - name: Install Bubblewrap
         run: npm install -g @bubblewrap/cli
-        
-      - name: Build TWA
+
+      - name: Init TWA project
         run: |
-          bubblewrap init --manifest https://quantumcyberlabs.com/manifest.json \
-            --packageId com.quantumcyberlabs.politicalab \
-            --name "PoliticaLab" \
-            --shortName "PoliticaLab"
-          bubblewrap build
-          
+          echo '{"packageId":"com.quantumcyberlabs.politicalab","host":"quantumcyberlabs.com","name":"PoliticaLab","launcherName":"PoliticaLab","display":"standalone","orientation":"portrait","themeColor":"#1a1a2e","backgroundColor":"#f5f0e8","startUrl":"/politicalab.html","iconUrl":"https://quantumcyberlabs.com/icon-512.png","maskableIconUrl":"https://quantumcyberlabs.com/icon-512.png","appVersionCode":1,"appVersionName":"1.0.0","shortcuts":[],"generatorApp":"bubblewrap-cli","webManifestUrl":"https://quantumcyberlabs.com/manifest.json","signingKey":{"path":"android.keystore","alias":"android"},"enableNotifications":false,"features":{},"alphaDependencies":{"enabled":false},"enableSiteSettingsShortcut":true,"isChromeOSOnly":false,"isMetaQuest":false,"fullScopeUrl":"https://quantumcyberlabs.com/","minSdkVersion":19,"locationDelegationEnabled":true}' > twa-manifest.json
+          bubblewrap build --skipPwaValidation
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: politicalab-apk
-          path: '*.apk'
+          path: '**/*.apk'
