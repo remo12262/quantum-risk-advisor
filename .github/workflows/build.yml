@@ -17,18 +17,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Build TWA APK
+        uses: chromeos/pwa-play-billing@v1
         with:
-          node-version: '18'
-
-      - name: Install Bubblewrap
-        run: npm install -g @bubblewrap/cli
-
-      - name: Init TWA project
-        run: |
-          echo '{"packageId":"com.quantumcyberlabs.politicalab","host":"quantumcyberlabs.com","name":"PoliticaLab","launcherName":"PoliticaLab","display":"standalone","orientation":"portrait","themeColor":"#1a1a2e","backgroundColor":"#f5f0e8","startUrl":"/politicalab.html","iconUrl":"https://quantumcyberlabs.com/icon-512.png","maskableIconUrl":"https://quantumcyberlabs.com/icon-512.png","appVersionCode":1,"appVersionName":"1.0.0","shortcuts":[],"generatorApp":"bubblewrap-cli","webManifestUrl":"https://quantumcyberlabs.com/manifest.json","signingKey":{"path":"android.keystore","alias":"android"},"enableNotifications":false,"features":{},"alphaDependencies":{"enabled":false},"enableSiteSettingsShortcut":true,"isChromeOSOnly":false,"isMetaQuest":false,"fullScopeUrl":"https://quantumcyberlabs.com/","minSdkVersion":19,"locationDelegationEnabled":true}' > twa-manifest.json
-          bubblewrap build --skipPwaValidation
+          package-id: com.quantumcyberlabs.politicalab
+          host: quantumcyberlabs.com
+          start-url: /politicalab.html
+          name: PoliticaLab
+          icon-url: https://quantumcyberlabs.com/icon-512.png
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
