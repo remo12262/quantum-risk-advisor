@@ -567,6 +567,7 @@ if ('serviceWorker' in navigator) {
   </div>
 
   <div class="usage-counter" id="usageCounter" style="display:none;"></div>
+
   <!-- ANALYZE BUTTON -->
   <button class="btn-analyze" id="analyzeBtn" onclick="analyze()">
     <span>⚡</span>
@@ -619,6 +620,22 @@ if ('serviceWorker' in navigator) {
   <span data-it="PoliticaLab — Political Intelligence Advisor — Powered by AI" data-en="PoliticaLab — Political Intelligence Advisor — Powered by AI"></span>
 </footer>
 
+<!-- PAYWALL MODAL -->
+<div class="paywall-overlay" id="paywallModal">
+  <div class="paywall-box">
+    <div class="paywall-icon">🔒</div>
+    <div class="paywall-title" data-it="Accesso Premium" data-en="Premium Access"></div>
+    <p class="paywall-desc" data-it="PoliticaLab è un servizio premium. Sblocca 10 analisi strategiche con un unico pagamento." data-en="PoliticaLab is a premium service. Unlock 10 strategic analyses with a single payment."></p>
+    <div class="paywall-price">€4,99</div>
+    <div class="paywall-price-desc" data-it="10 analisi · pagamento unico · nessun abbonamento" data-en="10 analyses · one-time payment · no subscription"></div>
+    <button class="btn-paypal" onclick="goToPayPal()">
+      <span>💳</span>
+      <span data-it="Paga con PayPal" data-en="Pay with PayPal"></span>
+    </button>
+    <button class="btn-paypal-cancel" onclick="closePaywall()" data-it="Annulla" data-en="Cancel"></button>
+  </div>
+</div>
+
 <script>
 // ─── LANGUAGE ─────────────────────────────────────────────────────────────────
 let currentLang = 'it';
@@ -641,7 +658,6 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
 
-  // Update all [data-it] / [data-en] elements
   document.querySelectorAll('[data-it]').forEach(el => {
     const txt = el.getAttribute('data-' + lang);
     if (el.tagName === 'OPTION') {
@@ -653,15 +669,12 @@ function setLang(lang) {
     }
   });
 
-  // Rebuild chips
   buildChips();
 
-  // Update select options
   document.querySelectorAll('select option[data-it]').forEach(opt => {
     opt.textContent = opt.getAttribute('data-' + lang);
   });
 
-  // Update textarea placeholder
   document.getElementById('userMessage').placeholder =
     lang === 'it' ? 'Scrivi qui il tuo messaggio da analizzare...' : 'Write your message to analyze here...';
 }
@@ -688,6 +701,43 @@ function toggleTopic(i, el) {
   }
 }
 
+// ─── PAYPAL GATE ──────────────────────────────────────────────────────────────
+const PAYPAL_URL = 'https://www.paypal.com/ncp/payment/TSU6JFQ7WTJVS';
+const FREE_LIMIT = 0;       // ← NESSUNA PROVA GRATUITA
+const PAID_ANALYSES = 10;
+
+function getUsage() { return parseInt(localStorage.getItem('pl_usage') || '0'); }
+function getPaid()  { return parseInt(localStorage.getItem('pl_paid')  || '0'); }
+function canAnalyze() {
+  return getUsage() < FREE_LIMIT + getPaid();
+}
+function showPaywallModal() {
+  document.getElementById('paywallModal').style.display = 'flex';
+  document.querySelectorAll('#paywallModal [data-it]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + currentLang);
+  });
+}
+function closePaywall() {
+  document.getElementById('paywallModal').style.display = 'none';
+}
+function goToPayPal() {
+  localStorage.setItem('pl_paid', getPaid() + PAID_ANALYSES);
+  window.open(PAYPAL_URL, '_blank');
+  closePaywall();
+}
+function updateCounter() {
+  const used = getUsage();
+  const total = FREE_LIMIT + getPaid();
+  const remaining = Math.max(0, total - used);
+  const el = document.getElementById('usageCounter');
+  if (el) {
+    el.textContent = currentLang === 'it'
+      ? `Analisi rimanenti: ${remaining}`
+      : `Remaining analyses: ${remaining}`;
+    el.style.display = 'block';
+  }
+}
+
 // ─── ANALYZE ──────────────────────────────────────────────────────────────────
 async function analyze() {
   const city = document.getElementById('city').value.trim();
@@ -698,7 +748,7 @@ async function analyze() {
   const userMessage = document.getElementById('userMessage').value.trim();
   const selectedThemes = selectedTopics.map(i => topics[currentLang][i]);
 
-  // PAYWALL CHECK
+  // PAYWALL CHECK — scatta sempre al primo clic
   if (!canAnalyze()) {
     showPaywallModal();
     return;
@@ -756,7 +806,6 @@ Analizza il contesto e rispondi con ESATTAMENTE questo formato JSON (senza markd
     const clean = raw.replace(/```json|```/g, '').trim();
     const parsed = JSON.parse(clean);
 
-    // Populate results
     document.getElementById('resFraming').textContent = parsed.framing || '—';
     document.getElementById('resRisks').textContent = parsed.risks || '—';
     document.getElementById('resMessages').textContent = parsed.messages || '—';
@@ -798,65 +847,11 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-// ─── PAYPAL GATE ──────────────────────────────────────────────────────────────
-const PAYPAL_URL = 'https://www.paypal.com/ncp/payment/TSU6JFQ7WTJVS';
-const FREE_LIMIT = 1;
-const PAID_ANALYSES = 10;
-
-function getUsage() { return parseInt(localStorage.getItem('pl_usage') || '0'); }
-function getPaid() { return parseInt(localStorage.getItem('pl_paid') || '0'); }
-function canAnalyze() {
-  return getUsage() < FREE_LIMIT + getPaid();
-}
-function showPaywallModal() {
-  document.getElementById('paywallModal').style.display = 'flex';
-  // update modal text for current lang
-  document.querySelectorAll('#paywallModal [data-it]').forEach(el => {
-    el.textContent = el.getAttribute('data-' + currentLang);
-  });
-}
-function closePaywall() {
-  document.getElementById('paywallModal').style.display = 'none';
-}
-function goToPayPal() {
-  localStorage.setItem('pl_paid', getPaid() + PAID_ANALYSES);
-  window.open(PAYPAL_URL, '_blank');
-  closePaywall();
-}
-function updateCounter() {
-  const used = getUsage();
-  const total = FREE_LIMIT + getPaid();
-  const remaining = Math.max(0, total - used);
-  const el = document.getElementById('usageCounter');
-  if (el) {
-    el.textContent = currentLang === 'it'
-      ? `Analisi rimanenti: ${remaining}`
-      : `Remaining analyses: ${remaining}`;
-    el.style.display = 'block';
-  }
-}
-
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 buildChips();
 setLang('it');
 </script>
 
-<!-- PAYWALL MODAL -->
-<div class="paywall-overlay" id="paywallModal">
-  <div class="paywall-box">
-    <div class="paywall-icon">🔒</div>
-    <div class="paywall-title" data-it="Analisi gratuita esaurita" data-en="Free analysis used"></div>
-    <p class="paywall-desc" data-it="Hai utilizzato la tua analisi gratuita. Sblocca 10 analisi aggiuntive con un unico pagamento." data-en="You have used your free analysis. Unlock 10 additional analyses with a single payment."></p>
-    <div class="paywall-price">€4,99</div>
-    <div class="paywall-price-desc" data-it="10 analisi · pagamento unico · nessun abbonamento" data-en="10 analyses · one-time payment · no subscription"></div>
-    <button class="btn-paypal" onclick="goToPayPal()">
-      <span>💳</span>
-      <span data-it="Paga con PayPal" data-en="Pay with PayPal"></span>
-    </button>
-    <button class="btn-paypal-cancel" onclick="closePaywall()" data-it="Annulla" data-en="Cancel"></button>
-  </div>
-</div>
-
 </body>
 </html>
+
