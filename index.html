@@ -19,13 +19,14 @@
   --green: #1a6b4a;
   --gold: #b8860b;
   --blue: #1a3a6e;
+  --navy: #162447;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 
 /* NAV */
 nav {
-  background: var(--ink);
+  background: var(--navy);
   padding: 0 3rem;
   height: 60px;
   display: flex;
@@ -53,7 +54,7 @@ nav {
 }
 .nav-links { display: flex; gap: 0.25rem; }
 .nav-link {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.92);
   font-size: 0.72rem;
   font-family: 'DM Mono', monospace;
   letter-spacing: 1px;
@@ -62,9 +63,10 @@ nav {
   padding: 5px 12px;
   border: 1px solid transparent;
   border-radius: 2px;
+  font-weight: 600;
   transition: all 0.2s;
 }
-.nav-link:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+.nav-link:hover { color: #fff; border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.08); }
 
 /* HERO */
 .hero {
@@ -114,7 +116,7 @@ nav {
 .hero h1 em { font-style: italic; color: var(--red); }
 .hero-sub {
   font-size: 1rem;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.70);
   max-width: 520px;
   margin: 0 auto 2.5rem;
   line-height: 1.7;
@@ -142,7 +144,7 @@ nav {
   font-size: 0.62rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.50);
   margin-top: 0.35rem;
 }
 
@@ -264,6 +266,26 @@ nav {
 .cta-politica { background: var(--red); color: #fff; }
 .cta-politica:hover { background: #a93226; }
 
+/* PLAY STORE BADGE */
+.play-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  background: var(--navy);
+  color: #fff !important;
+  text-decoration: none !important;
+  padding: 8px 16px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.2s;
+}
+.play-badge:hover { opacity: 0.88; }
+
 /* DIVIDER */
 .divider-band {
   background: var(--cream);
@@ -321,7 +343,7 @@ nav {
 
 /* CTA BAND */
 .cta-band {
-  background: var(--ink);
+  background: var(--navy);
   color: #fff;
   padding: 4rem 2rem;
   text-align: center;
@@ -332,7 +354,7 @@ nav {
   font-weight: 700;
   margin-bottom: 0.75rem;
 }
-.cta-band p { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 2rem; }
+.cta-band p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-bottom: 2rem; }
 .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 .btn-primary {
   background: var(--red);
@@ -350,35 +372,36 @@ nav {
 .btn-primary:hover { background: #a93226; }
 .btn-outline {
   background: transparent;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.85);
   padding: 0.8rem 2rem;
   font-size: 0.85rem;
   font-weight: 500;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.35);
   cursor: pointer;
   border-radius: 3px;
   text-decoration: none;
   font-family: 'DM Sans', sans-serif;
   transition: all 0.2s;
 }
-.btn-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+.btn-outline:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
 
 /* FOOTER */
 footer {
-  background: #111;
-  color: rgba(255,255,255,0.3);
+  background: var(--navy);
+  color: rgba(255,255,255,0.4);
   padding: 2rem 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 .footer-logo {
   font-family: 'Playfair Display', serif;
   font-size: 1rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.85);
 }
 .footer-links { display: flex; gap: 1.5rem; }
 .footer-links a {
@@ -386,15 +409,16 @@ footer {
   font-size: 0.62rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.55);
   text-decoration: none;
   transition: color 0.2s;
 }
-.footer-links a:hover { color: rgba(255,255,255,0.7); }
+.footer-links a:hover { color: rgba(255,255,255,0.9); }
 .footer-copy {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
   letter-spacing: 1px;
+  color: rgba(255,255,255,0.35);
 }
 
 @media (max-width: 768px) {
@@ -419,7 +443,6 @@ footer {
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-eyebrow">AI-Powered Intelligence Tools</div>
   <h1>Strumenti AI per chi<br>prende decisioni <em>strategiche</em></h1>
@@ -444,15 +467,12 @@ footer {
   </div>
 </section>
 
-<!-- PRODUCTS -->
 <section class="products">
   <div class="section-label">I nostri strumenti</div>
   <h2 class="section-title">Scegli la tua piattaforma</h2>
   <p class="section-sub">Ogni strumento è costruito su AI generativa per produrre analisi precise, personalizzate e immediatamente azionabili.</p>
-
   <div class="products-grid">
 
-    <!-- QUANTUM RISK ADVISOR -->
     <div class="product-card">
       <div class="product-header">
         <div><span class="product-tag tag-quantum">Cybersecurity</span></div>
@@ -471,7 +491,6 @@ footer {
       </div>
     </div>
 
-    <!-- POLITICALAB -->
     <div class="product-card">
       <div class="product-header">
         <div>
@@ -490,13 +509,17 @@ footer {
           <li>Punteggio di efficacia comunicativa 1–100</li>
         </ul>
         <a href="politicalab.html" class="product-cta cta-politica">Analizza la tua strategia →</a>
+        <a href="https://play.google.com/store/apps/details?id=com.remo.pulcini.politicalab"
+           target="_blank" class="play-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.37.21.8.22 1.18.04l13.2-7.62-2.9-2.91-11.48 10.49zM.5 1.4C.19 1.77 0 2.3 0 2.98v18.04c0 .68.19 1.21.5 1.58l.08.08 10.1-10.1v-.24L.58 1.32.5 1.4zM20.37 10.37l-2.82-1.63-3.22 3.22 3.22 3.22 2.84-1.64c.81-.47.81-1.23-.02-1.17zM4.36.2L17.56 7.82l-2.9 2.9L3.18.24C3.56.05 4 .06 4.36.2z"/></svg>
+          Disponibile su Google Play
+        </a>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- DIVIDER QUOTE -->
 <div class="divider-band">
   <blockquote>
     "Le decisioni migliori nascono da analisi precise. L'intelligenza artificiale non sostituisce il giudizio umano — lo amplifica con dati, contesto e velocità."
@@ -504,12 +527,10 @@ footer {
   <cite>— QuantumCyberLabs · AI Intelligence Tools</cite>
 </div>
 
-<!-- HOW IT WORKS -->
 <section class="how">
   <div class="section-label">Come funziona</div>
   <h2 class="section-title">Tre passi, zero complessità</h2>
   <p class="section-sub">Nessuna registrazione. Nessun dato salvato. Solo analisi AI precise e immediate.</p>
-
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-num">01</div>
@@ -529,7 +550,6 @@ footer {
   </div>
 </section>
 
-<!-- CTA BAND -->
 <div class="cta-band">
   <h2>Pronto a iniziare?</h2>
   <p>Entrambi gli strumenti sono gratuiti durante la fase beta. Nessuna registrazione richiesta.</p>
@@ -547,7 +567,7 @@ footer {
     <a href="https://quantumhub.tech" target="_blank">QuantumHub</a>
     <a href="https://qstrategix.com" target="_blank">Q-STRATEGIX</a>
   </div>
-  <div class="footer-copy">© 2025 QuantumCyberLabs · All rights reserved</div>
+  <div class="footer-copy">© 2026 QuantumCyberLabs · All rights reserved</div>
 </footer>
 
 </body>
